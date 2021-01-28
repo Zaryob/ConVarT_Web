@@ -781,6 +781,7 @@ function searchProteinNumbers($value)
     $ids[] = "SUBSTRING_INDEX(nc_prot.meta_value, '.', 1)";
 
     $ids = implode(',', $ids);
+
     $query = mysqli_query($db_connection, "SELECT GROUP_CONCAT(DISTINCT CONCAT(cdb.convart_gene_id, ',', cdb.db_id, ',', nc_sym.meta_value, ',', nc_spec.meta_value) SEPARATOR ';') 
                         AS data, nc_prot.ncbi_gene_id FROM ncbi_gene_meta AS nc_search INNER JOIN ncbi_gene_meta AS nc_spec ON 
                         nc_search.ncbi_gene_id=nc_spec.ncbi_gene_id AND nc_spec.meta_key='species_id' INNER JOIN ncbi_gene_meta AS nc_sym ON 

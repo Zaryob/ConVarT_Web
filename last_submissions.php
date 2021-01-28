@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<?php require_once("config.php"); ?>
 <link rel="icon" href="<?= $GLOBALS['base_url']; ?>files/img/convart_black.png">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="<?= $GLOBALS['base_url']; ?>files/css/style.css" media="screen" />

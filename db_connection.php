@@ -1,7 +1,7 @@
 <?php
 require_once("config.php");
 
-$db_connection=new mysqli($GLOBALS['host'], $GLOBALS['user'], $GLOBALS['password'], $GLOBALS['dbname']);
+$db_connection = new mysqli($GLOBALS['host'], $GLOBALS['user'], $GLOBALS['password'], $GLOBALS['dbname']);
 $dbh = new PDO('mysql:host='.$GLOBALS['host'].';dbname='.$GLOBALS['dbname'], $GLOBALS['user'], $GLOBALS['password']);
 
 if($db_connection->connect_errno) {
