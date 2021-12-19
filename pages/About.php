@@ -8,8 +8,8 @@
 	</div>
 	<div class="row specialTextBox">
 	    <span class="flow-text"><br>
-	        The conserved clinical variation visualization tool (ConVarT) is an online visualization resource developed by the Kaplan Lab, with the goal of displaying the evolutionary conservation of amino acid substitutions associated with diseases and non-clinically significant amino acid substitutions from ClinVar, COSMIC and gnomAD databases, and allowing easy access to collections of conserved genes and conserved variants associated with human diseases for the model organism research community. In addition, PTMs (post-translational modifications) are also integrated into the corresponding positions of amino acids on the human protein sequences.
-	        <br><br>All genes consisting of all types of amino acid substitutions from ClinVar (329,338 amino acid variations), COSMIC (6,842,627 amino acid variations) and gnomAD (16,179,380 amino acid variations) databases have been extracted, and a series of multiple sequence alignments of ortholog genes between Human, Chimp, Macaca, Zebrafish, Mouse, Rat, Xenopus, Drosophila, and <i> C. elegans</i> were conducted, with integration of all amino acid substitutions and Pfam protein domains into the corresponding positions. The data visualization tool is freely available for the benefit of the scientific community.
+			The conserved clinical variation visualization tool (ConVarT) is an online search engine for matching variants (MatchVars) between humans and mice, C. elegans developed by the Kaplan Lab. ConVarT integrated amino acid substitutions associated with diseases and non-clinically significant amino acid substitutions from ClinVar, COSMIC and gnomAD, dbSNP databases for humans, and amino acid substitutions from Mutagenetix for mouse and Wormbase for C. elegans, allowing easy access to collections of phenotypic, pathogenic, bening MatchVars and non-MatchVars between humans and mice, C. elegans for the model organism research and clinical scientist community. Protein domains and PTMs (post-translational modifications) are integrated into the corresponding positions of amino acids on the human protein sequences.
+	        <br><br>All genes consisting of all types of amino acid substitutions from ClinVar (329,338 amino acid variations), COSMIC (6,842,627 amino acid variations) and gnomAD (16,179,380 amino acid variations), dbSNP (1,086,546 amino acid variations), Mutagenetix (374,555 variants), Wormbase (406,844 variants) databases have been extracted, and a series of multiple sequence alignments of ortholog genes between Human, Mouse, and C. elegans were conducted, with integration of all amino acid substitutions and Pfam protein domains into the corresponding positions. The data visualization tool is freely available for the benefit of the scientific community.
 	        <br><br>
 	        <b>Here is the outline of ConVarT workflow:</b>
 			<div class="material-placeholder"><img class="materialboxed " width="98%" src="../files/img/pipelineFigure.png" data-caption="Pipeline Figure"></div>
@@ -57,15 +57,39 @@
 				</tr>
 				<tr>
 					<td>ClinVar</td>
-					<td>7,386</td>
-					<td>329,338</td>
-					<td>29 June, 2019</td>
+					<td>35,618 </td>
+					<td>2,280,300 </td>
+					<td>12 November, 2021</td>
 				</tr>
 				<tr>
 					<td>PhosphoSitePlus</td>
 					<td>21,282</td>
 					<td>383,095</td>
 					<td>29 June, 2019</td>
+				</tr>
+				<tr>
+					<td>WormBase</td>
+					<td>30,744 </td>
+					<td>443,523 </td>
+					<td>12 November, 2021</td>
+				</tr>
+				<tr>
+					<td>Mutagenetix </td>
+					<td>57,208  </td>
+					<td>618,501 </td>
+					<td>12 November, 2021</td>
+				</tr>
+				<tr>
+                                        <td>APF </td>
+                                        <td>8,474  </td>
+                                        <td>21,186 </td>
+                                        <td>12 November, 2021</td>
+                                </tr>
+				<tr>
+					<td>TOPMed </td>
+					<td>95,223 </td>
+					<td>39,891,272 </td>
+					<td>12 November, 2021</td>
 				</tr>
 			</table>
 
@@ -115,9 +139,9 @@
 	    <hr><br><br>
 
 	    <div class="col s12 m12 l3"><span class="credits-text"><b>Principal Investigators</b> <br> Oktay I. Kaplan <br> Sebiha Cevik</span></div>
-	    <div class="col s12 m12 l3"><span class="credits-text"><b>Data Production Team </b> <br> Halil  I. Bilgin<br> Furkan M. Torun</span></div>
-	    <div class="col s12 m12 l3"><span class="credits-text"><b>Web Site Team</b> <br>Halil  I. Bilgin<br>Furkan M. Torun </span></div>
-	    <div class="col s12 m12 l3"><span class="credits-text"><b>Experimental Team </b> <br> Pei Zhao (SunyBiotech Co.,Ltd)<br> Yahong Kang (SunyBiotech Co.,Ltd) <br> Mustafa S. Pir</span></div>
+	    <div class="col s12 m12 l3"><span class="credits-text"><b>Data Production Team </b> <br> Mustafa S. Pir<br> Halil I. Bilgin<br> Furkan M. Torun</span></div>
+	    <div class="col s12 m12 l3"><span class="credits-text"><b>Web Site Team</b> <br> Ahmet Sayıcı <br> Fatih Coskun <br> Halil  I. Bilgin<br>Furkan M. Torun </span></div>
+	    <div class="col s12 m12 l3"><span class="credits-text"><b>Experimental Team </b> <br> Mustafa S. Pir<br> Pei Zhao (SunyBiotech Co.,Ltd)<br> Yahong Kang (SunyBiotech Co.,Ltd)</span></div>
 	    
 		<div class="col s12 m12 l3"><span class="credits-text"><br><b>Databases and Tools</b> <br> 
 			<a href="https://www.ncbi.nlm.nih.gov/clinvar/" target="_blank"> ClinVar</a> <br> 

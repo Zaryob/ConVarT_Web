@@ -29,7 +29,7 @@ html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre
 .msa-container {
   width: 100%;
   height: auto;
-  min-height: 313px;
+  min-height: 350px;
   overflow-x: scroll;
   overflow-y: hidden; 
 }
@@ -183,13 +183,53 @@ html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre
   animation: pulse 2s infinite; */
 }
 .ptm:before, .ptmHighlighted:before {
-	content: "*";
-	margin-top: -18px;
+	content: "p";
+	margin-top: -25px;
 	position: absolute;
-	font-size: 22px;
+	font-size: 16px;
 	font-weight: bold;
-	color: red;
+	color: #52b5f1;
 }
+
+.hm:before{
+	content: "⁑";
+	margin-top: -25px;
+	position: absolute;
+	font-size: 18px;
+	font-weight: bold;
+	color: rgba(255,69,96,1)
+}
+
+.hc:before{
+	content: "⁑";
+	margin-top: -25px;
+	position: absolute;
+	font-size: 18px;
+	font-weight: bold;
+  color: rgba(255,69,96,1);
+  /* color: #00e396 */
+}
+
+.hmc:before{
+	content: "⁂";
+  margin-top: -25px;
+  position: absolute;
+  right: 1px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #feb019;
+} 
+
+.phe:before{
+	content: "✳";
+  margin-top: -25px;
+  position: absolute;
+  right: 4px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #02050f;
+}
+
 
 .ptmHighlighted:before {
 	margin-top: -30px !important;
@@ -214,7 +254,7 @@ html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre
 }
 
 .variation-inner-text-box {
-  height:140px !important;
+  height:125px !important;
   max-height:140px !important;
   padding: 10px !important;
   overflow-y:scroll;
@@ -263,7 +303,11 @@ html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre
                       border-radius:0!important;
                 }
 .go-to-position{position:fixed; margin-left: 5px}
-#position-number {position:absolute; top:-20px!important;color:#000!important;}
+#position-number {
+  position:absolute;
+  top:-40px!important;
+  background: transparent;
+  color:rgb(0, 0, 0)!important;}
 
 /* Form CSS */
 .form_input {

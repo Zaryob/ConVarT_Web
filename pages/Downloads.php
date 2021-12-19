@@ -5,6 +5,137 @@
     <h4 class="blue-text text-darken-1 center"><br>Downloads</h4>
     <span class="flow-text">ConVarT is a free, open-source and user-friendly web-based tool. <br>Therefore, ConVarT enables researchers to download and use the data using the links on the names of the files.</span><br> <br>
 
+	<!-- Download Article Tables -->
+    <div class="col s12 m12 l12">
+        <div class="collapsible-header active"><i class="material-icons">view_list</i>Downloads for the Tables in Article</div>
+        <div class="collapsible-body">
+            <center><input type="text" class="quick_search" id="quick_search_downloads" placeholder="Search in the table "></center>
+            <div  style="max-height: 800px !important; overflow-y: scroll !important; overflow-x: scroll !important;">
+                <table id="ArticleTable" class="special_table"><tbody>
+		            <tr>
+		                <th>File Name <i class="material-icons right">filter_list</i></th>
+		                <th>File Description <i class="material-icons right">filter_list</i></th>
+		                <th>Type <i class="material-icons right">filter_list</i></th>
+						<th>Size <i class="material-icons right">filter_list</i></th>
+		            </tr>
+		            <tr id="noResultQS_downloads" class="grey"><td colspan="6"><span class="flow-text white-text center">NO RESULT FOUND</span></td></tr>
+		            
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_1.xlsx">Table 1</a></td>
+		            	<td>Human and Mouse with Orthologous Variants (All)</td>
+		            	<td>.XLSX</td>
+						<td>17 MB</td>
+		            </tr>
+
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_2.xlsx">Table 2</a></td>
+		            	<td>Human variants and C. elegans Orthologous Variations (All)</td>
+		            	<td>.XLSX</td>
+						<td>40 MB</td>
+		            </tr>
+
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_3.xlsx">Table 3</a></td>
+		            	<td>C. elegans Variants Without Human Equivalent Variants (SIFT and Disease added) </td>
+		            	<td>.XLSX</td>
+						<td>14 MB</td>
+		            </tr>
+
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_4.xlsx">Table 4</a></td>
+		            	<td>C. elegans Phenotypic Variants without Human Equivalent Variants (SIFT and Disease added) </td>
+		            	<td>.XLSX</td>
+						<td>408 KB</td>
+		            </tr>
+
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_5.xlsx">Table 5</a></td>
+		            	<td>Human Benign Variants and C. elegans Phenotypic Variants</td>
+		            	<td>.XLSX</td>
+						<td>20 KB</td>
+		            </tr>
+
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_6.xlsx">Table 6</a></td>
+		            	<td>Human Benign Variants (ClinVar) and C. elegans Unknown Variants </td>
+		            	<td>.XLSX</td>
+						<td>532 KB</td>
+		            </tr>
+
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_7.xlsx">Table 7</a></td>
+		            	<td>Human Benign Variants (ClinVar) and Mouse Phenotypic Variants</td>
+		            	<td>.XLSX</td>
+						<td>128 KB</td>
+		            </tr>
+
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_8.xlsx">Table 8</a></td>
+		            	<td>Human Benign Variants (ClinVar) and Mouse Unknown Variants</td>
+		            	<td>.XLSX</td>
+						<td>248 KB</td>
+		            </tr>
+
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_9.xlsx">Table 9</a></td>
+		            	<td>Human Variants and C. elegans Orthologous Variants (No mouse orthologous genes)</td>
+		            	<td>.XLSX</td>
+						<td>264 KB</td>
+		            </tr>
+
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_10.xlsx">Table 10</a></td>
+		            	<td>Human Variants and Mouse Double Orthologous Variants (No C. elegans orthologous genes)</td>
+		            	<td>.XLSX</td>
+						<td>3.9 MB</td>
+		            </tr>
+
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_11.xlsx">Table 11</a></td>
+		            	<td>Human Pathogenic variants and C. elegans Phenotypic variants</td>
+		            	<td>.XLSX</td>
+						<td>164 KB</td>
+		            </tr>
+					
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_12.xlsx">Table 12</a></td>
+		            	<td>Human Pathogenic variants and C. elegans Unknown variants</td>
+		            	<td>.XLSX</td>
+						<td>428 KB</td>
+		            </tr>
+					
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_13.xlsx">Table 13</a></td>
+		            	<td>Human Pathogenic variants and Mouse Phenotypic variants</td>
+		            	<td>.XLSX</td>
+						<td>32 KB</td>
+		            </tr>
+					
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_14.xlsx">Table 14</a></td>
+		            	<td>Human Pathogenic variants and  Mouse Unknown variants</td>
+		            	<td>.XLSX</td>
+						<td>84 KB</td>
+		            </tr>
+					
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_15.xlsx">Table 15</a></td>
+		            	<td>Mouse Variants Without Human Equivalent Variants (SIFT and Disease added)</td>
+		            	<td>.XLSX</td>
+						<td>11 MB</td>
+		            </tr>
+					
+		            <tr class="list-download">
+		            	<td><a href="../files/tables/Table_16.xlsx">Table 16</a></td>
+		            	<td>Mouse Phenotypic Variants  Without Human Equivalent Variants (SIFT and Disease added)</td>
+		            	<td>.XLSX</td>
+						<td>1.9 MB</td>
+		            </tr>
+        </tbody></table>
+            </div>
+        </div>
+    <br></div>
+	
     <!-- Download DB Tables -->
     <div class="col s12 m12 l12">
         <div class="collapsible-header active"><i class="material-icons">view_list</i>Downloads for the Tables in ConVarT</div>
@@ -22,91 +153,101 @@
 		            <tr id="noResultQS_downloads" class="grey"><td colspan="6"><span class="flow-text white-text center">NO RESULT FOUND</span></td></tr>
 		            
 		            <tr class="list-download">
-		            	<td><a href="https://drive.google.com/file/d/1hYn7CqYEF3SbFoxvWJHfPRX-Ra7h0lh7/view?usp=sharing">ClinVar Whole</a></td>
+		            	<td><a href="../files/tables/clinvar.csv">ClinVar</a></td>
 		            	<td>ClinVar Whole Data</td>
-		            	<td>.TXT</td>
-		                <td>353 MB</td>
-		            	<td>February, 2019</td>
-		            </tr>
-
-		            <tr class="list-download">
-		            	<td><a href="https://drive.google.com/open?id=1veHWsrbBgaCAKfRJQTAbBy7DH5fDpF5O">ClinVar A. acid</a></td>
-		            	<td>ClinVar Data (only amino acid subs.) in GRCh37 </td>
 		            	<td>.CSV</td>
-		                <td>15 MB</td>
-		            	<td>February, 2019</td>
+		                <td>161 MB</td>
+		            	<td>January, 2021</td>
 		            </tr>
 
 		            <tr class="list-download">
-		            	<td><a href="https://drive.google.com/open?id=1R-G9dnXmiRxZw-breRn-gK3wlf4Gwd18">gnomAD</a></td>
+		            	<td><a href="../files/tables/gnomad.csv">gnomAD</a></td>
 		            	<td>gnomAD (only amino acid subs.) in GRCh37 </td>
 		            	<td>.CSV</td>
-		                <td>312 MB</td>
+		                <td>2.1 GB</td>
 		            	<td>June, 2019</td>
 		            </tr>
 
 		            <tr class="list-download">
-		            	<td><a href="https://drive.google.com/file/d/18gITqr5lNc728ZTP-LdhD45v9FTv9KMb/view?usp=sharing">COSMIC</a></td>
+		            	<td><a href="../files/tables/CosmicMutantExport.csv">COSMIC</a></td>
 		            	<td>COSMIC Whole Data in GRCh37 </td>
 		            	<td>.CSV</td>
-		                <td>346 MB</td>
+		                <td>1.9 GB</td>
 		            	<td>May, 2019</td>
 		            </tr>
 
 		            <tr class="list-download">
-		            	<td><a href="https://drive.google.com/open?id=1HCI79HuShC7-HVtfAt9NklkFCeMc_A_s">PTM</a></td>
+		            	<td><a href="../files/tables/ptm.csv">PTM</a></td>
 		            	<td>PTMs Whole Data in GRCh37 from PhosphoSitePlus</td>
 		            	<td>.CSV</td>
 		                <td>58 MB</td>
 		            	<td>May, 2019</td>
 		            </tr>
-
-		            <tr class="list-download">
-		            	<td><a href="https://drive.google.com/open?id=1L22yyiJezbebPGVsqSgGgyMRHPWKoa1-">Conservation Scores</a></td>
-		            	<td>All of the conservation scores across the species for each human protein transcript. </td>
+					
+					<tr class="list-download">
+		            	<td><a href="../files/tables/mouse_variants.csv">Mouse</a></td>
+		            	<td>Mouse Variants</td>
 		            	<td>.CSV</td>
-		                <td>14 MB</td>
-		            	<td>June, 2019</td>
+		                <td>26 MB</td>
+		            	<td>February, 2021</td>
 		            </tr>
-
+					
+					<tr class="list-download">
+		            	<td><a href="../files/tables/celegans_variants.csv">C. Elegans</a></td>
+		            	<td>C. Elegans Variants</td>
+		            	<td>.CSV</td>
+		                <td>58 MB</td>
+		            	<td>January, 2021</td>
+		            
+					</tr>
+					
+					<tr class="list-download">
+		            	<td><a href="../files/tables/topmed.csv">TOPMed</a></td>
+		            	<td>Human Variants in TOPMed</td>
+		            	<td>.CSV</td>
+		                <td>2.91 GB</td>
+		            	<td>January, 2021</td>
+		            
+					</tr>
+					
 		            <tr class="list-download">
-		            	<td><a href="https://drive.google.com/file/d/1S5zAO6UHc0eZHu3N3XEWh556cVKkrxeJ/view?usp=sharing">DisGeNET Table</a></td>
+		            	<td><a href="../files/tables/diseases_genes.csv">DisGeNET Table</a></td>
 		            	<td>Disease ID and Gene ID table from DisGeNET . </td>
 		            	<td>.CSV</td>
-		                <td>3 MB</td>
+		                <td>32 MB</td>
 		            	<td>May, 2019</td>
 		            </tr>
 
 		            <tr class="list-download">
-		            	<td><a href="https://drive.google.com/open?id=1YA2hHIfFlr-ddytRD_jrtoOa-9SfyTO4">DisGeNET Info</a></td>
+		            	<td><a href="../files/tables/disease_info.csv">DisGeNET Info</a></td>
 		            	<td>Disease ID and Disease Info from DisGeNET . </td>
 		            	<td>.CSV</td>
-		                <td>621 KB</td>
+		                <td>552 KB</td>
 		            	<td>May, 2019</td>
 		            </tr>
 
 		            <tr class="list-download">
-		            	<td><a href="https://drive.google.com/open?id=1IpMl-w6Z2cL-TNnZTs5oSkYbtQtBtXc4">Homology Curation</a></td>
+		            	<td><a href="../files/tables/homology.csv">Homology Curation</a></td>
 		            	<td>ConVarT Homology Curation. </td>
 		            	<td>.CSV</td>
-		                <td>1 MB</td>
+		                <td>1.3 MB</td>
 		            	<td>May, 2019</td>
 		            </tr>
 
 		            <tr class="list-download">
-		            	<td><a href="https://drive.google.com/open?id=1fKjxMFmlKxGXGao0RlI-956FOHCBOOiI">Pfam Domains</a></td>
+		            	<td><a href="../files/tables/domains.csv">Pfam Domains</a></td>
 		            	<td>All of the Pfam protein domains with scores that are generated using human protein transcripts in ConVarT. </td>
 		            	<td>.CSV</td>
-		                <td>10 MB</td>
+		                <td>8.4 MB</td>
 		            	<td>June, 2019</td>
 		            </tr>
 
 		            <tr class="list-download">
-		            	<td><a href="https://drive.google.com/file/d/1hnbuiz4DWQ4jHQtpicfNuRS8Hr1atjuB/view?usp=sharing">Pfam D. Descriptions</a></td>
+		            	<td><a href="../files/tables/domains_desc.csv">Pfam D. Descriptions</a></td>
 		            	<td>Descriptions of Pfam domains with their IDs </td>
 		            	<td>.CSV</td>
-		                <td>1 MB</td>
-		            	<td>Aprilil, 2019</td>
+		                <td>985 KB</td>
+		            	<td>April, 2019</td>
 		            </tr>
         </tbody></table>
             </div>

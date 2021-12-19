@@ -37,7 +37,38 @@ if(isset($_GET['action']) && $_GET['action'] == 'humansearch'){
 
     echo json_encode($output);
     exit;
-} else if(!isset($_GET['action']) || !isset($_GET['id'])){
+} 
+else if(isset($_GET['action']) && $_GET['action'] == 'orthovarhelp'){
+
+    $searchResults = searchProteinNumbers($_GET['query']);
+    unset($searchResults['Homo sapiens']);
+	unset($searchResults['Danio rerio']);
+	unset($searchResults['Drosophila melanogaster']);
+	unset($searchResults['Macaca mulatta']);
+	unset($searchResults['Pan troglodytes']);
+	unset($searchResults['Rattus norvegicus']);
+	unset($searchResults['Xenopus tropicalis']);
+    
+    $output = [];
+    
+    foreach($searchResults as $species => $transcripts) {
+        $output[$species] = [];
+
+        foreach($transcripts as $transcript){
+        
+            $homologs = getHumanHomolog($transcript['ncbi_gene_id']);
+            if($homologs == null)
+                continue;
+            $transcript['human_homolog'] = $homologs;
+            $output[$species][] = $transcript;
+        }
+
+    }
+	
+    echo json_encode($output);
+    exit;
+}
+else if(!isset($_GET['action']) || !isset($_GET['id'])){
     echo json_encode(['data'=>[]]);
     exit;
 }
@@ -71,8 +102,8 @@ switch ($_GET['action']) {
         $i = 0;
         foreach (['variation_id', 'allele_id', 'rs_number', 'variant_type', 'name',
             'variation', 'position', 
-            'clinical_significance', 'last_updated', 'phenotypes', 
-            'cytogenetic', 'review_status',
+            'clinical_significance', 'phenotypes', 
+            'review_status',
             'rcv_accession'] as $column) {
             $columns[] = ['db' => $column, 'dt'=>$i];
             $colToInd[$column] = $i;
@@ -97,9 +128,7 @@ switch ($_GET['action']) {
                 $row[$colToInd['name']],
                 $row[$colToInd['variation']]. '---' .$row[$colToInd['position']],
                 $row[$colToInd['clinical_significance']],
-                $row[$colToInd['last_updated']],
                 str_replace(';', '; ', $row[$colToInd['phenotypes']]),
-                $row[$colToInd['cytogenetic']],
                 $row[$colToInd['review_status']],
                 str_replace(';', '; ', $row[$colToInd['rcv_accession']])
             ];
@@ -144,6 +173,43 @@ switch ($_GET['action']) {
         }
         break;
 
+    case 'community':
+        $commQuery = getCommunityData($id);
+        $data = [];
+
+        while($row = mysqli_fetch_assoc($commQuery)){
+            $data[] = [
+				$row['sended_by'],
+				$row['organization'],
+                $row['organism'],
+                $row['protein_id'],
+                $row['protein_pos'],
+                $row['aa_change'],
+                $row['phenotype'],
+                $row['impact'],
+                $row['consequence'],
+                $row['source']
+            ];
+        }
+        break;
+        
+	case 'go_annotation':
+		$go_annotationQuery = getGO_AnnotationData($id);
+		$data = [];
+		
+		while($row = mysqli_fetch_assoc($go_annotationQuery)) {
+			$data[] = [
+				$row['go_term_acc'],
+				$row['organism'],
+                $row['go_domain'],
+                //$row['gene_id'],
+                $row['go_term_name'],
+                $row['go_term_def'],
+				$row['evidence_codes'],
+            ];
+		}
+		break;
+
     case 'ptm':
         $ptmQuery = getPtmData($id);
         $data = [];
@@ -172,12 +238,14 @@ switch ($_GET['action']) {
         
         while($row = mysqli_fetch_assoc($mouseQuery)){
             $data[] = [
-                $row['ensembl_gene_id'],
-                $row['gene_symbol'],
-                $row['ensembl_transcript_id'],
+                $row['variation_id'],
+                $row['gene_name'],
+                $row['phenotype'],
                 $row['aa_change'],
-                $row['mutation_type'],
-                $row['Position'],
+                $row['refseq_id'],
+                $row['pos'],
+				$row['variant_type'],
+				$row['source']
             ];
         }
         break;
@@ -192,31 +260,50 @@ switch ($_GET['action']) {
                 $row['Gene'],
                 $row['Feature'],
                 $row['Consequence'],
-                $row['Protein_position'] . '---' .$row['HGVSp'], 
+                //$row['Protein_position'] . '---' .$row['HGVSp'],
+				$row['Protein_position'], 				
                 $row['HGVSp'],
                 $row['Impact'],
                 $row['Uploaded_variation']
             ];
         }
         break;
+	
+	case 'TopMed':
+        $TopMedQuery = getTopMedData($id);
+        $data = [];
 
-        case 'celVariants':
-            $celVariantsQuery = getCelVariantsData($id);
-            $data = [];
+        while($row = mysqli_fetch_assoc($TopMedQuery)){
+            $data[] = [
+                $row['ensm_gene_id'],
+                $row['ensm_transcript_id'],
+                $row['variant_type'],
+				$row['position'], 				
+                $row['variation'],
+                $row['sift_score'],
+                $row['polyphen_score'],
+				$row['variant_ids']
+            ];
+        }
+        break;
+		
+    case 'celVariants':
+		$celVariantsQuery = getCelVariantsData($id);
+		$data = [];
     
-            while($row = mysqli_fetch_assoc($celVariantsQuery)){
-                $data[] = [
-                    $row['Gene.name'],
-                    $row['NCBI.Gene.ID'],
-                    $row['WormBase.Sequence.Name'],
-                    $row['RefSeq.protein.ID'],
-                    $row['Variant_position'] . '---' .$row['Changes'], 
-                    $row['Changes'],
-                    $row['Mutation_type'],
-                    $row['WormBase.var.ID']
-                ];
-            }
-            break;
+		while($row = mysqli_fetch_assoc($celVariantsQuery)){
+			$data[] = [
+				$row['ids'],
+				$row['gene_name'],
+				$row['variant_type'],
+				$row['refseq_id'],
+				$row['aa_change'], 
+				$row['pos'],
+				$row['phenotype'],
+				$row['source']
+			];
+		}
+		break;
 
     case 'cosmic':
        

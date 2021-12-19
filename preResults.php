@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once("db_connection.php"); 
     require_once("functions.php");
     #Capture the term searched for spemud
@@ -21,7 +21,36 @@
     // Select the path: Spemud or Gene search 
     if ($spemud_searchText != "") {
         $active = "active_spmud";
-        // $proteinsBySpemud = search_spemud_proteins($spemud_searchText);
+        $orthoId = $spemud_searchText;
+
+        #$proteinsBySpemud = search_spemud_proteins($spemud_searchText);
+        if(strstr($spemud_searchText, 'NM_')){
+            $orthoId = getGeneIdbyDBId(explode('.', $spemud_searchText)[0]);
+            
+        } else if (strstr($spemud_searchText, 'NP_')) { //&& hasMSA($spemud_searchText)){ PERFORMANS İYİLEŞTİRMESİ İÇİN KALDIRDIM. iLERDE SORUN OLABİLİR
+            $orthoId = $spemud_searchText;
+        }else if (substr($spemud_searchText, 0, 2) == 'rs'){
+            
+            $query = getClinvarData("'$spemud_searchText'", 'rs_number');
+            if($query == null){
+                $query = getGnomadData("'$spemud_searchText'", 'rs_number');
+            }
+            
+            $row = @mysqli_fetch_assoc($query);
+            if(isset($row['nm_id'])){
+                $orthoId = $row['np_id']; 
+                
+            } else if (isset($row['canonical_transcript'])) {
+                $orthoId = $row['canonical_transcript'];    
+            }
+        }else if (substr($spemud_searchText, 0, 4) == 'ENST'){
+            $query = getGnomadData("'$spemud_searchText'", 'canonical_transcript');
+            $row = @mysqli_fetch_assoc($query);
+            if (isset($row['canonical_transcript'])) {
+                $orthoId = $row['canonical_transcript'];    
+            }
+        }
+        $spemud_searchText = $orthoId;
     }
 
     else {
@@ -30,7 +59,7 @@
         if(strstr($searchText, 'NM_')){
             $geneId = getGeneIdbyDBId(explode('.', $searchText)[0]);
             
-        } else if (strstr($searchText, 'NP_') && hasMSA($searchText)){
+        } else if (strstr($searchText, 'NP_')) { //&& hasMSA($searchText)){ PERFORMANS İYİLEŞTİRMESİ İÇİN KALDIRDIM. iLERDE SORUN OLABİLİR
             $geneId = $searchText;
         }else if (substr($searchText, 0, 2) == 'rs'){
             
@@ -73,12 +102,18 @@
     <!-- Spemud -->
     <?php if ($spemud_searchText != ""): ?>
         <?php $proteinsBySpemud = search_spemud_proteins($spemud_searchText); ?>
-        <form action="<?= $GLOBALS['base_url']; ?>result2.php" method="get">
+        <form action="<?= $GLOBALS['base_url']; ?>orthovar" method="get">
             <?php if($proteinsBySpemud == ""): ?>
-                <a href="#" class="btn waves-effect waves-light preResultBtnEmpty">No finding for "<?= $spemud_searchText; ?>"</a>
+                <!-- <a href="#" class="btn waves-effect waves-light preResultBtnEmpty">No finding for "<?= $spemud_searchText; ?>"</a> -->
+
+                <iframe src="<?php echo "https://convart.org/spemud_helper_flow_orthovar.php?spm=".$spemud_searchText ?>" title="description" width="100%" height="100%" frameborder="0"> 
             <?php else: ?>
                 <div class="card-panel blue">
-                    <span class="white-text">Select at least one transcript (protein isoform) from the species. Then, press "Analyse" to visualize and list the variants.
+                    <span class="white-text">1) Pick a human transcript for a gene of your interest (Note: Sometimes gene names are used as a synonym for the others, so it might end up several different genes, which are highlighted in different colors)
+						<br>2) Once you pick a human transcript, the homolog genes in other species will be listed. One transcript for each organism should be selected. 
+						<br>3) Click Analyse button
+						<br>4) The numbers at the end show the total number of variants reported for that transcript (ClinVar, gnomAD, COSMIC, and TOPMed).
+						<br>Non-coding Ensembl transcripts (ENST) will not show up. For example, non-coding transcript ENST00000504290 (ENST) (such as TP53; ) will not appear in the ConVarT v.1.0 version.  The ConVarT v.1.0 currently shows human variants from gnomAD, TOPMed, COSMIC, and ClinVar, all of which are mapped to the GRCh37/hg19 reference sequence. So those Ensembl transcripts (ENST) that are not available in GRCh37/hg19 will not show up. We will be moving to GRCh38 in the future.
                     </span>
                 </div>
                 <?php print($proteinsBySpemud); ?>
@@ -129,36 +164,114 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    var mouse_radio_buttons = document.getElementsByName("mouse");
+    var worm_radio_buttons = document.getElementsByName("worm");
+
+    document.getElementById('mouse').style.display = 'none';
+    document.getElementById('worm').style.display = 'none';
+
+    for (mouse_radio of mouse_radio_buttons) {
+        mouse_radio.parentNode.style.display = 'none';
+    };
+
+    for (worm_radio of worm_radio_buttons) {
+        worm_radio.parentNode.style.display = 'none';
+    };
+
 	$('.modal').modal();
     $("#startAnalyse").addClass("disabled");
     $("form :input").change(function() {
+        $("#startAnalyse").addClass("disabled");
 
+        var paras = document.getElementsByClassName('alert');
+
+        while(paras[0]) {
+            paras[0].parentNode.removeChild(paras[0]);
+        };
+        
         speciesList = ['human', 'mouse', 'worm'];
         selectedSpeciesCount = 0; //must be 3 for the analysis
         availableSpeciesCount = 0;
 
-        for(species of speciesList) {
-            
-            if($('input[name='+species+']:checked').val() != undefined) {
-                selectedSpeciesCount++;
-            }
+        if($(this).attr('id').startsWith('human')) {
+            for (mouse_radio of mouse_radio_buttons) {
+                mouse_radio.parentNode.style.display = 'none';
+                mouse_radio.checked = false;
+            };
 
-            if($('input[name='+species+']').length > 0){
-                availableSpeciesCount++;
-            }
-
-        }
-        console.log(selectedSpeciesCount, availableSpeciesCount);
-        if(selectedSpeciesCount == availableSpeciesCount) {
-            $("#startAnalyse").removeClass("disabled");    
+            for (worm_radio of worm_radio_buttons) {
+                worm_radio.parentNode.style.display = 'none';
+                worm_radio.checked = false;
+            };
         }
 
+        selected_cb = $(this).attr('id');
+        selected_cb_color = $('label[for=' + selected_cb +']').css('color');
+
+        document.getElementById('mouse').style.display = 'block';
+        document.getElementById('worm').style.display = 'block';
+
+        all_radio_buttons = document.getElementsByClassName('convart-radio');
+
+        available_mouse = 0;
+        available_worm = 0;
+
+        selected_first_mouse = true;
+        selected_first_worm = true;
+
+        first_available_mouse = -1
+        first_available_worm = -1
+
+        for (radio_button of all_radio_buttons) {
+            radio_button_input = $(radio_button.childNodes[0]);
+            radio_button_label = $(radio_button.childNodes[2]);
+
+            if (radio_button_label.css('color') === selected_cb_color) {
+                radio_button.style.display = 'block';
+                if(radio_button_input.attr('id').startsWith('mouse')){
+                    if (selected_first_mouse) {
+                        first_available_mouse = radio_button_input.attr('id')
+                    }
+                    selected_first_mouse = false;
+                    available_mouse++;
+                }
+                if(radio_button_input.attr('id').startsWith('worm')){
+                    if (selected_first_worm) {
+                        first_available_worm = radio_button_input.attr('id')
+                    }
+                    selected_first_worm = false;
+                    available_worm++;
+                }
+            }
+        };
+
+
+        if (available_mouse === 0) {
+            document.getElementById('mouse').insertAdjacentHTML('afterend','<h5 class="alert" >No homolog transcript found for this species.<br><br></h5>');
+        }
+
+        if (available_worm === 0) {
+            document.getElementById('worm').insertAdjacentHTML('afterend','<h5 class="alert" >No homolog transcript found for this species.<br><br></h5>');
+        }
+
+        if($(this).attr('id').startsWith('human')) {
+
+            if (first_available_mouse !== -1) {
+                document.getElementById(first_available_mouse).checked = true;
+            }
+
+            if (first_available_worm !== -1) {
+                document.getElementById(first_available_worm).checked = true;
+            }
+        }
+
+        $("#startAnalyse").removeClass("disabled");
     });
     
 });
-setTimeout(function() {
-    $("form :input").trigger('change');
-}, 100);
+// setTimeout(function() {
+//    $("form :input").trigger('change');
+// }, 100);
 </script>
 
 

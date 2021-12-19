@@ -53,8 +53,23 @@ function MSAViewer(id, rawSequence, geneSymbol, variations) {
     var variationNotes = {};
     this.variationNotes = variationNotes;
 
+    var PHEPositions_mouse = {};
+    this.PHEPositions_mouse = PHEPositions_mouse;
+	
+	var PHEPositions_celegans = {};
+    this.PHEPositions_celegans = PHEPositions_celegans;
+
     var ptmNotes = {};
     this.ptmNotes = ptmNotes;
+
+    var HMPositions = {};
+    this.HMPositions = HMPositions;
+
+    var HCPositions = {};
+    this.HCPositions = HCPositions;
+
+    var HMCPositions = {};
+    this.HMCPositions = HMCPositions;
 
     function getOffsetX(prNumber, aaNumber) {
         var indexOfAA = that.getAminoacidPositionInViewport(prNumber, aaNumber);
@@ -72,8 +87,10 @@ function MSAViewer(id, rawSequence, geneSymbol, variations) {
 
         proteinNotes = variationNotes[prNumber];
         for (var source in proteinNotes[aaNumber]) {
-            innerTextBox.innerHTML += "<h3>" + source + "</h3>" + proteinNotes[aaNumber][source];
-            //console.log(source);
+            if(source != 'HM' && source != 'HC' && source != 'HMC' && source != 'PHE_mouse' && source != 'PHE_celegans') {
+                innerTextBox.innerHTML += "<h3>" + source + "</h3>" + proteinNotes[aaNumber][source];
+                //console.log(source);
+            }
         }
         var aminoacidInfoBox = document.getElementById(this.ids.aminoacidInfo);
         aminoacidInfoBox.innerHTML = '';
@@ -288,6 +305,12 @@ MSAViewer.prototype.loadDivsInViewport = function(reset) {
     processedSequences = this.processedSequences;
     variationNotes  = this.variationNotes;
     ptmNotes = this.ptmNotes;
+    HMPositions = this.HMPositions;
+    HCPositions = this.HCPositions;
+    PHEPositions_mouse = this.PHEPositions_mouse;
+	PHEPositions_celegans = this.PHEPositions_celegans;
+    HMCPositions = this.HMCPositions;
+
     if(reset == true){
         for(var i in loadedPositions){
             loadedPositions[i] = false;
@@ -327,10 +350,10 @@ MSAViewer.prototype.loadDivsInViewport = function(reset) {
             
             aaBox.className = "i-"+i;  
         }
-        if(aaLetter == '-'){
+        /*if(aaLetter == '-'){
           continue;
         }
-
+		*/
         if(j in variationNotes && viewportToAANumber[j][i] != -1 && viewportToAANumber[j][i] in variationNotes[j]){
            aaBox.className += " specialAa";
            aaBox.setAttribute('data-sid', j);
@@ -340,6 +363,50 @@ MSAViewer.prototype.loadDivsInViewport = function(reset) {
            aaBox.className += " ptm";
            aaBox.setAttribute('data-sid', j);
         }
+
+        if(j == 0 && viewportToAANumber[j][i] != -1 && viewportToAANumber[j][i] in HMPositions){
+            aaBox.className += " hm";
+            aaBox.setAttribute('data-sid', j); 
+        }
+
+        if(j == 0 && viewportToAANumber[j][i] != -1 && viewportToAANumber[j][i] in HCPositions){
+            aaBox.className += " hc";
+            aaBox.setAttribute('data-sid', j);
+        }
+
+        if(j == 0 && viewportToAANumber[j][i] != -1 && viewportToAANumber[j][i] in HMCPositions){
+            aaBox.className += " hmc";
+            aaBox.setAttribute('data-sid', j);
+        }
+		//console.log(PHEPositions_mouse);
+		if (j == 0 && j+1+1 <= processedSequences.length) {
+			if ( viewportToAANumber[j+1][i] != -1 && viewportToAANumber[j+1][i] in PHEPositions_mouse){ 
+			//console.log("PHE" + i + "mouse");
+            aaBox.className += " phe";
+            aaBox.setAttribute('data-sid', j);
+            aaBox.classList.remove("hm");
+            aaBox.classList.remove("hmc");
+            aaBox.classList.remove("hc");
+            aaBox.classList.remove("ptm");
+			}
+		}
+        if(j == 0 && j+2+1 <= processedSequences.length) {	
+			if (viewportToAANumber[j+2][i] != -1 && viewportToAANumber[j+2][i] in PHEPositions_celegans){
+			//console.log("PHE" + i + "celegans");
+            aaBox.className += " phe";
+            aaBox.setAttribute('data-sid', j);
+            aaBox.classList.remove("hm");
+            aaBox.classList.remove("hmc");
+            aaBox.classList.remove("hc");
+            aaBox.classList.remove("ptm");
+			}
+        }
+        /*
+        if(j == 0 && viewportToAANumber[j][i] != -1 && viewportToAANumber[j][i] === 11){
+            aaBox.className += " hm";
+            aaBox.setAttribute('data-sid', j);
+        }
+        */
 
         aaBox.innerHTML = aaLetter;
         aaBox.style.cssText  = 'left:'+(i*20)+'px;';
@@ -415,9 +482,25 @@ MSAViewer.prototype.addVariation = function(protein, aminoacid, variationNote, s
         notesByProtein[aaNumber][source] = "";
     }
 
+
     notesByProtein[aaNumber][source] += "<br>" + variationNote;
     this.variationNotes[protein] = notesByProtein
-
+    
+    if (variationNote == "PHE_mouse") {
+        this.PHEPositions_mouse[aaNumber] += aminoacid + 1;
+    }
+	if (variationNote == "PHE_celegans") {
+        this.PHEPositions_celegans[aaNumber] += aminoacid + 1;
+    }
+    if (source == "HMC") {
+        this.HMCPositions[aaNumber] += aminoacid + 1;
+    }
+    if (source == "HM") {
+        this.HMPositions[aaNumber] += aminoacid + 1;
+    }
+    if (source == "HC") {
+        this.HCPositions[aaNumber] += aminoacid + 1;
+    }
     if (source == "PTM") {
         this.ptmNotes[aaNumber] += aminoacid + 1;
     }

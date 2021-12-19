@@ -40,72 +40,29 @@ if (isset($_POST['submit'])) {
 	$impact = $_POST["impact"];
 	$consequence = $_POST["consequence"];
 	$source = $_POST["source"];
-	$validation_code =  sha1($email . $sended_by . "AGU" . round(microtime(true) * 1000));
+	$admin_key = $_POST["admin_key"];
 
-	// INSERT
-	mysqli_query($db_connection, "INSERT INTO community_variants (sended_by,email,organization, organism,protein_id,biotype,protein_pos,aa_change,phenotype,impact,consequence,source, validation_code) 
-	VALUES('$sended_by', '$email', '$organization', '$organism','$protein_id', '$biotype', '$protein_pos', '$aa_change', '$phenotype', '$impact', '$consequence', '$source', '$validation_code')");
+	$validation_code =  sha1('');
 
-	// mysqli_query($db_connection, "INSERT INTO community_variants (sended_by, email) VALUES('$sended_by', '$email')");
+	if (strcmp($validation_code, $validation_code) == 0) {
+		// INSERT
+		mysqli_query($db_connection, "INSERT INTO community_variants (sended_by,email,organization, organism,protein_id,biotype,protein_pos,aa_change,phenotype,impact,consequence,source,validation_code,validation) 
+		VALUES('$sended_by', '$email', '$organization', '$organism','$protein_id', '$biotype', '$protein_pos', '$aa_change', '$phenotype', '$impact', '$consequence', '$source', '$validation_code',1)");
 
-	if (mysqli_error($db_connection)) {
-		//echo mysqli_error($db_connection);
-		echo '<h3 class="red-text text-darken-1 center">Some problems occured in our database. </h3>';
-		exit;
-	} else {
-		echo '<br><br><h3 class="green-text text-darken-1 center">Your submission has been received. Thanks!</h3> <br><br>';
+		// mysqli_query($db_connection, "INSERT INTO community_variants (sended_by, email) VALUES('$sended_by', '$email')");
 
-		$mail = new PHPMailer(true);
-
-		try {
-			$mail->IsSMTP();
-			$mail->Host = '';
-			$mail->Username   = '';
-
-			$mail->Password   = '';
-			$mail->Port = 465;
-			#$mail->Port = 587;
-			$mail->SMTPAuth = true;
-			$mail->SMTPSecure = 'ssl';
-			$mail->SMTPOptions = array(
-				'ssl' => array(
-					'verify_peer' => false,
-					'verify_peer_name' => false,
-					'allow_self_signed' => true
-				)
-			);
-
-			$mail->setFrom('', 'Convart Org');
-			$mail->addAddress('');
-
-			// Content
-			$mail->isHTML(true);
-			$mail->Subject = "New Community Contributions";
-			$main_body     = "<b>Variant Details</b><br>";
-			$main_body    .= "<br><b>Sent By: </b> " .  $sended_by;
-			$main_body    .= "<br><b>Email: </b> " .  $email;
-			$main_body    .= "<br><b>Organization: </b> " .  $organization;
-			$main_body    .= "<br><b>Organism: </b> " .  $organism;
-			$main_body    .= "<br><b>Protein Id: </b> " .  $protein_id;
-			$main_body    .= "<br><b>Biotype: </b> " . $biotype;
-			$main_body    .= "<br><b>Protein Position: </b> " .  $protein_pos;
-			$main_body    .= "<br><b>Aminoasit Change: </b> " .  $aa_change;
-			$main_body    .= "<br><b>Phenotype: </b> " . $phenotype;
-			$main_body    .= "<br><b>Impact: </b> " . $impact;
-			$main_body    .= "<br><b>Consequence: </b> " . $consequence;
-			$main_body    .= "<br><b>Source: </b> " . $source;
-			$main_body    .= "<br><br>";
-			$main_body    .= "<p><a href='https://convart.org/tool.php?validate=" . $validation_code . "'>Validate</a></p>";
-			$mail->Body  = $main_body;
-			$mail->MsgHTML = $main_body;
-			$mail->AltBody = $main_body;
-			$mail->send();
-		} catch (Exception $e) {
-			//echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+		if (mysqli_error($db_connection)) {
+			// echo mysqli_error($db_connection);
 			echo '<h3 class="red-text text-darken-1 center">Some problems occured in our database. </h3>';
 			exit;
-		}
-	};
+		} else {
+			echo '<br><br><h3 class="green-text text-darken-1 center">Your submission has been received. Thanks!</h3> <br><br>';
+		};
+	} else {
+		echo '<h3 class="red-text text-darken-1 center">Wrong Admin Key!</h3>';
+	}
+
+	
 };
 
 ?>
@@ -113,7 +70,7 @@ if (isset($_POST['submit'])) {
 <div class="container pageBox white z-depth-2">
 	<div class="row specialTextBox">
 		<h4 class="blue-text text-darken-1 center">Submit a variant</h4><br>
-		<h5> If you would like to contribute and improve ConVarT, do not hesitate to submit a new variant:</h5>
+		<h5 class="center"> !!! Only For Admin Usage !!!</h5>
 		<hr>
 		<br>
 
@@ -208,10 +165,16 @@ if (isset($_POST['submit'])) {
 				</div>
 			</div>
 
+			<div class="row">
+				<div class="input-field col s12">
+					<input name="admin_key" type="password" required class="validate">
+					<label for="admin_key">Admin Key</label>
+				</div>
+			</div>
+
 			<input class='btn waves-effect waves-light blue center' type="submit" name="submit" value="Submit A New Variant to ConVarT"><br>
 
 			<br>
-			<small>*Your submission will be listed after validation processes.</small>
 		</form>
 
 
@@ -219,14 +182,6 @@ if (isset($_POST['submit'])) {
 </div>
 
 <br>
-<br>
 
-<div class="container pageBox white z-depth-2">
-	<div class="row specialTextBox">
-		<h4 class="blue-text text-darken-1 center">Feedbacks</h4>
-		<small class="flow-text"> User feedback is valuable to improve the ConVarT. Please send us any comment, suggestion or correction you may have.<br>
-			E-mail:<a href="mailto:oktay.kaplan@agu.edu.tr">oktay.kaplan@agu.edu.tr</a></small> <br><br>
-	</div>
-</div><br>
 
 <?php require("../footer.php"); ?>
