@@ -67,15 +67,21 @@ function processMSA($row)
     $fasta = $row['fasta'];
 
     $fasta = explode("\n>", trim($fasta));
-    $homo = @end(array_filter($fasta, function ($x) {
+
+    $filtered_array = array_filter($fasta, function ($x) {
         return strpos($x, 'Homo sapiens') !== false;
-    }));
-    $mouse = @end(array_filter($fasta, function ($x) {
+    });
+    $homo = @end($filtered_array);
+
+    $filtered_array =array_filter($fasta, function ($x) {
         return strpos($x, 'Mus musculus') !== false;
-    }));
-    $worm = @end(array_filter($fasta, function ($x) {
+    });
+    $mouse = @end($filtered_array);
+
+    $filtered_array=array_filter($fasta, function ($x) {
         return strpos($x, 'Caenorhabditis elegans') !== false;
-    }));
+    });
+    $worm = @end($filtered_array);
 
     $homoId = array_search($homo, $fasta);
     $mouseId = array_search($mouse, $fasta);
@@ -1133,7 +1139,7 @@ function getCommunityVariations($page_id)
     global $db_connection;
     $query = mysqli_query($db_connection, "SELECT DISTINCT submission_date, sended_by, protein_pos, aa_change, consequence, phenotype, organism, protein_id, organization, validation_code, source FROM community_variants WHERE validation = 1 ORDER BY submission_date DESC LIMIT 25 OFFSET {$from_position}");
 
-    if (mysqli_num_rows($query) == 0)
+    if (!$query || mysqli_num_rows($query) == 0)
         return null;
 
     $data = array();
