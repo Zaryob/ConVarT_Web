@@ -59,11 +59,11 @@ if (isset($_POST['submit'])) {
 
 		try {
 			$mail->IsSMTP();
-			$mail->Host = '';
-			$mail->Username   = '';
+			$mail->Host = $GLOBALS['smtp_host'];
+			$mail->Username = $GLOBALS['smtp_user'];
 
-			$mail->Password   = '';
-			$mail->Port = 465;
+			$mail->Password = $GLOBALS['smtp_passwd'];
+			$mail->Port = $GLOBALS['smtp_port'];
 			#$mail->Port = 587;
 			$mail->SMTPAuth = true;
 			$mail->SMTPSecure = 'ssl';
@@ -75,8 +75,8 @@ if (isset($_POST['submit'])) {
 				)
 			);
 
-			$mail->setFrom('', 'Convart Org');
-			$mail->addAddress('');
+			$mail->setFrom($GLOBALS['smtp_user'], 'Convart Org');
+			$mail->addAddress($GLOBALS['smtp_cc']); // All related with CC. You can disable it
 
 			// Content
 			$mail->isHTML(true);
