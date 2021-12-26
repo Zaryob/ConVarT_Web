@@ -262,7 +262,7 @@
                         <br>
                     </form>
                     <div class="col s12 m12 l12 center-align" style='margin-top: 18px'>
-                        <a class="home_link" href="diseases.php?q=Joubert+Syndrome">Joubert Syndrome</a>, <a class="home_link" href="diseases.php?q=Alzheimer">Alzheimer</a>, <a class="home_link" href="diseases.php?q=Acute+Myeloid+Leukemia">Acute Myeloid Leukemia</a>
+                        <a class="home_link" href="disease?q=Joubert+Syndrome">Joubert Syndrome</a>, <a class="home_link" href="disease?q=Alzheimer">Alzheimer</a>, <a class="home_link" href="disease?q=Acute+Myeloid+Leukemia">Acute Myeloid Leukemia</a>
                     </div>
                 </div>
             </div>
