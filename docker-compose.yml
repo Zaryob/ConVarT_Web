@@ -1,0 +1,61 @@
+version: "2"
+services:
+  db:
+    image: mysql
+    container_name: mysql_server
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: convart
+      MYSQL_USER: convart
+      MYSQL_PASSWORD: convart_secret
+      MYSQL_ROOT_PASSWORD: convart_secret
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - persistent:/var/lib/mysql
+    networks:
+      backend:
+         ipv4_address: 172.20.0.2
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    links:
+      - db:db
+    depends_on:
+      - db
+    ports:
+      - "8001:80"
+    environment:
+      MYSQL_USER: convart
+      MYSQL_PASSWORD: convart_secret
+      MYSQL_ROOT_PASSWORD: convart_secret
+    networks:
+      - frontend
+      - backend
+  www:
+    build: .
+    container_name: apache_server
+    links:
+      - db
+    depends_on:
+      - db
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html/
+    networks:
+      - frontend
+      - backend
+networks:
+  frontend:
+  backend:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          #docker-compose v3+ do not use ip_range
+          ip_range: 172.28.5.0/24
+
+volumes:
+  persistent:
