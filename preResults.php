@@ -1,6 +1,7 @@
 <?php
-    require_once("db_connection.php"); 
+    require_once("db_connection.php");
     require_once("functions.php");
+    require_once("config.php");
     #Capture the term searched for spemud
     $spemud_searchText = trim($_GET['spemud']);
     $spemud_searchText = preg_replace("#[^0-9a-z_\-.:]i#","", $spemud_searchText);
@@ -102,11 +103,11 @@
     <!-- Spemud -->
     <?php if ($spemud_searchText != ""): ?>
         <?php $proteinsBySpemud = search_spemud_proteins($spemud_searchText); ?>
-        <form action="<?= $GLOBALS['base_url']; ?>orthovar" method="get">
+        <form action="<?php echo $GLOBALS['base_url']; ?>orthovar" method="get">
             <?php if($proteinsBySpemud == ""): ?>
                 <!-- <a href="#" class="btn waves-effect waves-light preResultBtnEmpty">No finding for "<?= $spemud_searchText; ?>"</a> -->
 
-                <iframe src="<?php echo "https://convart.org/spemud_helper_flow_orthovar.php?spm=".$spemud_searchText ?>" title="description" width="100%" height="100%" frameborder="0"> 
+                <iframe src="<?php echo $GLOBALS['base_url']."spemud_helper_flow_orthovar.php?spm=".$spemud_searchText ?>" title="description" width="100%" height="100%" frameborder="0">
             <?php else: ?>
                 <div class="card-panel blue">
                     <span class="white-text">1) Pick a human transcript for a gene of your interest (Note: Sometimes gene names are used as a synonym for the others, so it might end up several different genes, which are highlighted in different colors)

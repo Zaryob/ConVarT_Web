@@ -23,7 +23,7 @@ if (isset($_GET['msa_id']) and is_numeric($_GET['msa_id'])) {
 }
 
 if (!isset($msa) or empty($msa)) {
-    echo '<div class="center-align card-panel blue "> <span class="white-text">The MSA could not be found! </span><br> <br><a href="http://convart.org" class="btn white blue-text">Go Back to Search Page</a> </div>';
+    echo '<div class="center-align card-panel blue "> <span class="white-text">The MSA could not be found! </span><br> <br><a href="'.$GLOBALS['base_url'].'" class="btn white blue-text">Go Back to Search Page</a> </div>';
     exit();
 }
 

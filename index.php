@@ -101,7 +101,7 @@
         <div class="navbar-fixed">
             <nav>
                 <div class="nav-wrapper sitemenu">
-                    <a href="https://convart.org" class="brand-logo sitelogo"><img src="files/img/convart.png" class="sitelogoimg"></a>
+                    <a href="<?= $GLOBALS['base_url']; ?>" class="brand-logo sitelogo"><img src="files/img/convart.png" class="sitelogoimg"></a>
                     <a href="#" data-activates="mobile-demo" class="button-collapse white-text"><i class="mobilbuton material-icons">menu</i></a>
                     <ul class="right hide-on-med-and-down menulinks">
                         <li><a href="index.php">Home</a></li>
@@ -241,7 +241,7 @@
                         </div>
                     </form>
                     <center>
-                        <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large" data-text="Here is ConVarT (Conserved clinical Variation visualization Tool)! Check it out on " data-url="https://www.convart.org/" data-hashtags=" ConVarT,ModelOrganismCommunity" data-show-count="true" data-via="CiliopathyLab" data-lang="en"> Tweet </a>
+                        <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large" data-text="Here is ConVarT (Conserved clinical Variation visualization Tool)! Check it out on " data-url="<?= $GLOBALS['base_url']; ?>" data-hashtags=" ConVarT,ModelOrganismCommunity" data-show-count="true" data-via="CiliopathyLab" data-lang="en"> Tweet </a>
                     </center>
                     <!--<div class="chip"> Our work will be presented at <a href="eshg2019">#ESHG2019</a> on 17th June. <i class="close material-icons">close</i> </div>
                         <a href="<?= $GLOBALS['base_url']; ?>seqSearch.php" class="btn waves-effect waves-light waves-blue white blue-text center seqSearchButtonHome"><i class="material-icons left">format_align_center</i> Search with protein sequence</a><br> -->
@@ -405,7 +405,7 @@
                 Materialize.toast("Please verify you are not robot!", 5500, "rounded");
             }
             if (key == "maintenance") {
-                window.location.href = "https://convart.org/503.html";
+                window.location.href = $GLOBALS['base_url']."503.html";
             }
         });
     </script>
