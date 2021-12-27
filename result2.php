@@ -27,7 +27,7 @@ if (mysqli_num_rows($msaIdQuery) == 0) {
 	$msaIdQuery = mysqli_query($db_connection, "SELECT GROUP_CONCAT(convart_gene_id) AS ids, msa_id FROM msa_gene GROUP BY msa_id HAVING ids = '$human_convart_id' LIMIT 1");
 	if (mysqli_num_rows($msaIdQuery) == 0) {
     # Burayı sonra düzenle!!
-    echo '<div class="center-align card-panel blue "> <span class="white-text">The MSA could not be found! </span><br> <br><a href="https://convart.org" class="btn white blue-text">Go Back to Search Page</a> </div>';
+    echo '<div class="center-align card-panel blue "> <span class="white-text">The MSA could not be found! </span><br> <br><a href="'.$GLOBALS['base_url'].'" class="btn white blue-text">Go Back to Search Page</a> </div>';
     exit();
 	}
 }

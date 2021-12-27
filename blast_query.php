@@ -74,7 +74,7 @@ if (!empty($humanGeneDetails['convart_gene_id'])) {
     $msaId = createMSA($fasta, [$humanGeneDetails['convart_gene_id']], 'pairwise');
     header("Location: ".$GLOBALS['base_url'].'msa?id='.$id. "&msa_id=".$msaId);
 } else {
-    header("Location: https://convart.org/msa?id=NOGENE");
+    header("Location: ".$GLOBALS['base_url']."/msa?id=NOGENE");
 }
 
 unlink($randomFilename);

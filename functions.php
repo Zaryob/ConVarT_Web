@@ -689,7 +689,7 @@ function validateCommunityVariant($validation_code)
     }
 
     $row = mysqli_fetch_assoc($query);
-    header('Location: https://convart.org');
+    header('Location: '.$GLOBALS['base_url']);
     return true;
 }
 

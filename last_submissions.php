@@ -89,7 +89,6 @@
 
 			for (var j = 0; j < 1; j++) {
 				var td = document.createElement('td');
-
 				if (data[i]['is_admin_submission'] === false) {
 					var span = document.createElement('span');
 					span.style.color = 'rgb(255, 69,96)';
@@ -129,7 +128,7 @@
 
 				span = document.createElement('a');
 				span.style.color = 'rgb(255, 69,96)';
-				span.href = 'https://convart.org/search?spemud=' + data[i]['protein_id'];
+				span.href = <?php echo $GLOBALS['base_url']; ?> + 'search?spemud=' + data[i]['protein_id'];
 				span.target = '_blank';
 				span.appendChild(document.createTextNode(
 					' p.' +
