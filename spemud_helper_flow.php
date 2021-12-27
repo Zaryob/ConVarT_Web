@@ -11,6 +11,7 @@
 
     function speciesView(transcriptsBySpecies) {
         html = "";
+
         for(species in transcriptsBySpecies){
             transcripts = transcriptsBySpecies[species];
             if (transcripts.length == 0)

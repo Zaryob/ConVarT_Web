@@ -13,7 +13,8 @@ $spm_iframe = trim($_GET['spm']);
 
 	function speciesView(transcriptsBySpecies) {
 		html = "";
-		for(species in transcriptsBySpecies) {
+
+        for(species in transcriptsBySpecies) {
 			transcripts = transcriptsBySpecies[species];
 			if(transcripts.length == 0) continue;
 			html += `<div class="row"> <div class="pageTitle">Results in <i> ${species} </i> <hr></div> `;
@@ -30,6 +31,7 @@ $spm_iframe = trim($_GET['spm']);
 			humanGeneSymbol = transcript['human_homolog']['human_gene_symbol']
 			if(humanGeneSymbol in usedHumanGeneSymbols) continue
 			else usedHumanGeneSymbols[humanGeneSymbol] = true;
+
 			htmlTranscript = `<a target="_blank"
                     href="<?php echo $GLOBALS['base_url']; ?>search?spemud=${transcript['human_homolog']['human_gene_symbol']}"
                     class="btn waves-effect waves-light preResultBtn"
