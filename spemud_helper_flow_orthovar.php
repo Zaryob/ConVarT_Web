@@ -1,6 +1,7 @@
 <?php
 define('IGNORE_HEADER', 'asd');
 require ("header.php");
+require_once("config.php");
 $spm_iframe = trim($_GET['spm']);
 
 

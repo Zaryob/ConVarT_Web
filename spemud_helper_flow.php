@@ -1,7 +1,7 @@
 <?php     
-    define('IGNORE_HEADER', 'asd');    
-    require("header.php");  
-
+    define('IGNORE_HEADER', 'asd');
+    require_once("config.php");
+    require("header.php");
 ?>
 
 <script type="text/javascript">

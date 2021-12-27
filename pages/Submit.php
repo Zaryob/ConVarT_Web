@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
 			$main_body    .= "<br><b>Consequence: </b> " . $consequence;
 			$main_body    .= "<br><b>Source: </b> " . $source;
 			$main_body    .= "<br><br>";
-			$main_body    .= "<p><a href='https://convart.org/tool.php?validate=" . $validation_code . "'>Validate</a></p>";
+			$main_body    .= "<p><a href='".$GLOBALS['base_url']."tool.php?validate=" . $validation_code . "'>Validate</a></p>";
 			$mail->Body  = $main_body;
 			$mail->MsgHTML = $main_body;
 			$mail->AltBody = $main_body;
