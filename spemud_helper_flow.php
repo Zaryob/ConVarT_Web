@@ -2,7 +2,6 @@
     define('IGNORE_HEADER', 'asd');
     require_once("config.php");
     require("header.php");
-
 ?>
 
 <script type="text/javascript">
@@ -38,7 +37,7 @@
                 usedHumanGeneSymbols[humanGeneSymbol] = true;
 
             htmlTranscript = `<a target="_blank" 
-                    href="`+ <?php echo $GLOBALS['base_url']; ?> + `current_project/search?spemud=${transcript['human_homolog']['human_gene_symbol']}"
+                    href="<?php echo $GLOBALS['base_url']; ?>/current_project/search?spemud=${transcript['human_homolog']['human_gene_symbol']}"
                     class="btn waves-effect waves-light preResultBtn">
                     <i>${transcript['gene_symbol']}</i> (${transcript['ncbi_gene_id']}) |
                      HUMAN  ${transcript['human_homolog']['human_gene_symbol']} 

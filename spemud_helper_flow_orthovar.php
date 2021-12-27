@@ -33,7 +33,7 @@ $spm_iframe = trim($_GET['spm']);
 			else usedHumanGeneSymbols[humanGeneSymbol] = true;
 
 			htmlTranscript = `<a target="_blank"
-                    href="`+ <?php echo $GLOBALS['base_url']; ?> + `/search?spemud=${transcript['human_homolog']['human_gene_symbol']}"
+                    href="<?php echo $GLOBALS['base_url']; ?>search?spemud=${transcript['human_homolog']['human_gene_symbol']}"
                     class="btn waves-effect waves-light preResultBtn"
                     style="max-width:100%!important" >
                     <i>${transcript['gene_symbol']}</i> (${transcript['ncbi_gene_id']}) |

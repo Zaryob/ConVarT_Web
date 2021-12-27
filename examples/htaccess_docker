@@ -19,3 +19,7 @@ RewriteRule ^/?search(.*?)?$ /preResults.php$1 [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^/?disease(.*?)?$ /diseases.php$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^/?msa(.*?)?$ /result.php$1 [L]
