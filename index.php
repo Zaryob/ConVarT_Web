@@ -159,20 +159,8 @@
                 <form action="<?= $GLOBALS['base_url']; ?>search" method="get" class="spemudForm" autocomplete="off">
                     <div class="row">
                         <div class="col s12 m12 l3"></div>
-                        <div class="col s12">
-                            <!-- Version Menu -->
-                            <div class="col s12 l2">
-                                <div class="input-field col s12 versioningOptions">
-                                    <select class="versioningOptions" id="versioningOptions">
-                                        <option value="1" selected>Version 1.0</option>
-                                        <option value="2">Version 1.1</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!-- Search Bar -->
-                            <div class="col s12 l10">
-                                <input name="spemud" id="spemud" type="text" class="searchbox" placeholder="Search a gene, GeneID, Ensembl ID or protein number" required>
-                            </div>
+                        <div class="col s12 m12 l6">
+                            <input name="spemud" id="spemud" type="text" class="searchbox" placeholder="Search a gene, GeneID, Ensembl ID or protein number" required>
                         </div>
                         <div class="col s12 m12 l3"></div>
                     </div>

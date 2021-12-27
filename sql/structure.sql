@@ -37,7 +37,6 @@ CREATE TABLE `clinvar` (
   `rcv_accession` varchar(255) NOT NULL,
   `variation_id` int(11) NOT NULL,
   `variant_type` varchar(255) NOT NULL,
-  `phenotype_ids` varchar(255) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `nm_id` varchar(255) NOT NULL,
   `position` int(11) NOT NULL,
@@ -46,7 +45,6 @@ CREATE TABLE `clinvar` (
   `last_updated` varchar(255) NOT NULL,
   `phenotypes` varchar(255) NOT NULL,
   `cytogenetic` varchar(255) NOT NULL,
-  `review_status` varchar(255) NOT NULL,
   `np_id` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -265,8 +263,7 @@ CREATE TABLE `mapping_human` (
 CREATE TABLE `msa` (
   `id` int(11) NOT NULL,
   `fasta` mediumtext COLLATE latin1_bin NOT NULL,
-  `alignment_method` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `alignment_method` varchar(255) CHARACTER SET utf8 NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
 
 -- --------------------------------------------------------
@@ -350,7 +347,6 @@ CREATE TABLE `species` (
 --
 ALTER TABLE `clinvar`
   ADD PRIMARY KEY (`clinvar_id`),
-  ADD UNIQUE KEY `clinvar_id` (`clinvar_id`),
   ADD KEY `gene_id` (`gene_id`),
   ADD KEY `gene_id_2` (`gene_id`),
   ADD KEY `gene_id_3` (`gene_id`);
