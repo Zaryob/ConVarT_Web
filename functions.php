@@ -781,7 +781,6 @@ function searchProteinNumbers($value)
     $ids[] = "SUBSTRING_INDEX(nc_prot.meta_value, '.', 1)";
 
     $ids = implode(',', $ids);
-
     $query = mysqli_query($db_connection, "SELECT GROUP_CONCAT(DISTINCT CONCAT(cdb.convart_gene_id, ',', cdb.db_id, ',', nc_sym.meta_value, ',', nc_spec.meta_value) SEPARATOR ';') 
                         AS data, nc_prot.ncbi_gene_id FROM ncbi_gene_meta AS nc_search INNER JOIN ncbi_gene_meta AS nc_spec ON 
                         nc_search.ncbi_gene_id=nc_spec.ncbi_gene_id AND nc_spec.meta_key='species_id' INNER JOIN ncbi_gene_meta AS nc_sym ON 
@@ -1139,7 +1138,6 @@ function getCommunityVariations($page_id)
     $from_position = $page_id * 25;
     global $db_connection;
     $query = mysqli_query($db_connection, "SELECT DISTINCT submission_date, sended_by, protein_pos, aa_change, consequence, phenotype, organism, protein_id, organization, validation_code, source FROM community_variants WHERE validation = 1 ORDER BY submission_date DESC LIMIT 25 OFFSET {$from_position}");
-
     if (!$query || mysqli_num_rows($query) == 0)
         return null;
 

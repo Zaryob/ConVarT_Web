@@ -405,7 +405,7 @@
                 Materialize.toast("Please verify you are not robot!", 5500, "rounded");
             }
             if (key == "maintenance") {
-                window.location.href = $GLOBALS['base_url']."503.html";
+                window.location.href = "<?php echo $GLOBALS['base_url']; ?>503.html";
             }
         });
     </script>

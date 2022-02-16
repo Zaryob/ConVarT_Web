@@ -4,11 +4,17 @@
     require_once("config.php");
     #Capture the term searched for spemud
     $spemud_searchText = trim($_GET['spemud']);
-    $spemud_searchText = preg_replace("#[^0-9a-z_\-.:]i#","", $spemud_searchText);
-    
-    #Capture the term searched for other search
+error_log("line 7 - spemud_searchText: ". $spemud_searchText);
+
+$spemud_searchText = preg_replace("#[^0-9a-z_\-.:]i#","", $spemud_searchText);
+error_log("line 10 - spemud_searchText: ". $spemud_searchText);
+
+#Capture the term searched for other search
     $searchText = trim($_GET['q']);
-    $searchText = preg_replace("#[^0-9a-z_\-.:]i#","", $searchText);
+error_log("line 14 - searchText: ". $searchText);
+
+$searchText = preg_replace("#[^0-9a-z_\-.:]i#","", $searchText);
+error_log("line 17 - searchText: ". $searchText);
 
     if($searchText == ""  && $spemud_searchText == ""){
         exit;
@@ -52,6 +58,8 @@
             }
         }
         $spemud_searchText = $orthoId;
+        error_log("line 61 - searchText: ". $spemud_searchText);
+
     }
 
     else {
@@ -62,7 +70,7 @@
             
         } else if (strstr($searchText, 'NP_')) { //&& hasMSA($searchText)){ PERFORMANS İYİLEŞTİRMESİ İÇİN KALDIRDIM. iLERDE SORUN OLABİLİR
             $geneId = $searchText;
-        }else if (substr($searchText, 0, 2) == 'rs'){
+        } else if (substr($searchText, 0, 2) == 'rs'){
             
             $query = getClinvarData("'$searchText'", 'rs_number');
             if($query == null){

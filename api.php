@@ -39,8 +39,9 @@ if(isset($_GET['action']) && $_GET['action'] == 'humansearch'){
     exit;
 } 
 else if(isset($_GET['action']) && $_GET['action'] == 'orthovarhelp'){
-
     $searchResults = searchProteinNumbers($_GET['query']);
+    #print_r($searchResults);
+
     unset($searchResults['Homo sapiens']);
 	unset($searchResults['Danio rerio']);
 	unset($searchResults['Drosophila melanogaster']);
@@ -48,14 +49,13 @@ else if(isset($_GET['action']) && $_GET['action'] == 'orthovarhelp'){
 	unset($searchResults['Pan troglodytes']);
 	unset($searchResults['Rattus norvegicus']);
 	unset($searchResults['Xenopus tropicalis']);
-    
     $output = [];
-    
+
     foreach($searchResults as $species => $transcripts) {
         $output[$species] = [];
 
         foreach($transcripts as $transcript){
-        
+
             $homologs = getHumanHomolog($transcript['ncbi_gene_id']);
             if($homologs == null)
                 continue;

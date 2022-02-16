@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php require_once("config.php"); ?>
 <link rel="icon" href="<?= $GLOBALS['base_url']; ?>files/img/convart_black.png">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -72,6 +71,7 @@
 
 <script>
 	function addTable() {
+        var base_url = "<?php echo $GLOBALS['base_url']; ?>";
 		var TableDiv = document.getElementById("contribution_table");
 
 		var table = document.createElement('table');
@@ -81,7 +81,7 @@
 		table.appendChild(tableBody);
 
 		var data = <?php echo json_encode(getCommunityVariations(0)); ?>;
-		console.log(data);
+		// console.log(data);
 
 		for (var i = 0; i < data.length; i++) {
 			var tr = document.createElement('tr');
@@ -128,7 +128,7 @@
 
 				span = document.createElement('a');
 				span.style.color = 'rgb(255, 69,96)';
-				span.href = <?php echo $GLOBALS['base_url']; ?> + 'search?spemud=' + data[i]['protein_id'];
+				span.href = + base_url + 'search?spemud=' + data[i]['protein_id'];
 				span.target = '_blank';
 				span.appendChild(document.createTextNode(
 					' p.' +
