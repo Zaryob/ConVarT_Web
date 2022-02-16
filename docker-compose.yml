@@ -37,10 +37,6 @@ services:
   www:
     build: .
     container_name: apache_server
-    links:
-      - db
-    depends_on:
-      - db
     ports:
       - "8000:80"
     volumes:
