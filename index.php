@@ -164,8 +164,8 @@
                             <div class="col s12 l2">
                                 <div class="input-field col s12 versioningOptions">
                                     <select class="versioningOptions" id="versioningOptions">
-                                        <option value="1" selected>Version 1.0</option>
-                                        <option value="2">Version 1.1</option>
+                                        <option value="1">Version 1.0</option>
+                                        <option value="2" selected>Version 1.1</option>
                                     </select>
                                 </div>
                             </div>

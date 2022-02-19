@@ -173,6 +173,7 @@ error_log("line 17 - searchText: ". $searchText);
 
 <script type="text/javascript">
 $(document).ready(function() {
+    /// ratio button kısmına bakılmalı.
     var mouse_radio_buttons = document.getElementsByName("mouse");
     var worm_radio_buttons = document.getElementsByName("worm");
 
@@ -190,6 +191,20 @@ $(document).ready(function() {
 	$('.modal').modal();
     $("#startAnalyse").addClass("disabled");
     $("form :input").change(function() {
+
+        // check just two genes at the same time
+        var checks = document.querySelectorAll(".check");
+        var max = 2;
+        for (var i = 0; i < checks.length; i++)
+            checks[i].onclick = selectiveCheck;
+        function selectiveCheck (event) {
+            var checkedChecks = document.querySelectorAll(".check:checked");
+            if (checkedChecks.length >= max + 1)
+                return false;
+        }
+
+        speciesList = ['human', 'mouse', 'worm'];
+
         $("#startAnalyse").addClass("disabled");
 
         var paras = document.getElementsByClassName('alert');
@@ -198,7 +213,6 @@ $(document).ready(function() {
             paras[0].parentNode.removeChild(paras[0]);
         };
         
-        speciesList = ['human', 'mouse', 'worm'];
         selectedSpeciesCount = 0; //must be 3 for the analysis
         availableSpeciesCount = 0;
 
@@ -263,8 +277,9 @@ $(document).ready(function() {
             document.getElementById('worm').insertAdjacentHTML('afterend','<h5 class="alert" >No homolog transcript found for this species.<br><br></h5>');
         }
 
+        /*
+        Undefined because we dont need automatically look up genes.
         if($(this).attr('id').startsWith('human')) {
-
             if (first_available_mouse !== -1) {
                 document.getElementById(first_available_mouse).checked = true;
             }
@@ -273,11 +288,15 @@ $(document).ready(function() {
                 document.getElementById(first_available_worm).checked = true;
             }
         }
+        */
+
 
         $("#startAnalyse").removeClass("disabled");
     });
     
 });
+
+
 // setTimeout(function() {
 //    $("form :input").trigger('change');
 // }, 100);
