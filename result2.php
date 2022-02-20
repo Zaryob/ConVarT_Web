@@ -353,6 +353,7 @@ if ($_GET['test']) {
 											<?php if ($TopMedCounts > 0) : ?> TopMed(<b><?= $TopMedCounts; ?></b>)<?php endif; ?>
                     </td>
                 </tr>
+                <?php if (!empty($geneDetailsMouse)): ?>
                 <tr>
                     <td colspan="2">
                         <div class="result_title blue_color"><i><?= $geneDetailsMouse['gene_symbol'] ? printify($geneDetailsMouse['gene_symbol']) : $transcriptIdMouse; ?></i> (GeneID: <?= $geneIdMouse; ?>) | <?= ucfirst($geneDetailsMouse['species_id']); ?></div>
@@ -380,6 +381,9 @@ if ($_GET['test']) {
                     <td><b>AlphaFold 3D Structure:</b></td>
                     <td><?= linkifyUniprot(@$uniprot_list['mouse']); ?></td>
                 </tr>
+                <?php endif; ?>
+
+                <?php if (!empty($geneDetailsWorm)): ?>
                 <tr>
                     <td colspan="2">
                         <div class="result_title blue_color"><i><?= $geneDetailsWorm['gene_symbol'] ? printify($geneDetailsWorm['gene_symbol']) : $transcriptIdWorm; ?></i> (GeneID: <?= $geneIdWorm; ?>) | <?= ucfirst($geneDetailsWorm['species_id']); ?></div>
@@ -407,6 +411,8 @@ if ($_GET['test']) {
                     <td><b>AlphaFold 3D Structure:</b></td>
                     <td><?= linkifyUniprot(@$uniprot_list['worm']); ?></td>
                 </tr>
+                <?php endif; ?>
+
             </table>
         </div>
         <br>
