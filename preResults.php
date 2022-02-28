@@ -125,7 +125,48 @@ error_log("line 17 - searchText: ". $searchText);
 						<br>Non-coding Ensembl transcripts (ENST) will not show up. For example, non-coding transcript ENST00000504290 (ENST) (such as TP53; ) will not appear in the ConVarT v.1.0 version.  The ConVarT v.1.0 currently shows human variants from gnomAD, TOPMed, COSMIC, and ClinVar, all of which are mapped to the GRCh37/hg19 reference sequence. So those Ensembl transcripts (ENST) that are not available in GRCh37/hg19 will not show up. We will be moving to GRCh38 in the future.
                     </span>
                 </div>
+                <div class="row" id="species-table">
+                    <?php
+                    # $speciesList = ['human', 'mouse', 'worm', 'other1', 'other2', 'other3'];
+                    $speciesList = ['human', 'mouse', 'worm'];
+
+                    foreach ($speciesList as $specie) { ?>
+
+
+                        <div class="col l4 s8 m4">
+                            <div class="card specie-select">
+                                <div class="card-image">
+                                    <img src="files/img/convart.png">
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4"><?php echo $specie ?><i
+                                                class="material-icons right">more_vert</i></span>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4"><?php echo $specie ?><i
+                                                class="material-icons right">close</i></span>
+                                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                                </div>
+                                <button
+                                        class="waves-effect waves-light btn blue lighten-3" id="_<?php echo $specie ?>_specie_button" type="button" value="unselected" style="width: 100%" onclick="changeText(this.id);">Select</button>
+
+                            </div>
+                        </div>
+
+                        <?php
+
+                    }
+
+                    ?>
+
+                </div>
+
+                <center><br><button class="btn waves-effect waves-light waves-white sb seqSearchButton disabled" id="showResults" type="button" onclick="changeResults(this.id);"><i class="material-icons">arrow_downward</i>Results</button></center>
+
+                <div id="proteinResultsBySpemud" style="display: none">
                 <?php print($proteinsBySpemud); ?>
+                </div>
+
                 <center><br><button class="btn waves-effect waves-light waves-white sb seqSearchButton" id="startAnalyse" type="submit"><i class="material-icons">search</i>ANALYSE</button></center>
         </form>
     <?php endif;?>
@@ -172,13 +213,64 @@ error_log("line 17 - searchText: ". $searchText);
 </div>
 
 <script type="text/javascript">
+
+    let selected_list=[]
+    function changeResults(id) {
+        if(document.getElementById(id).children[0].innerHTML=="arrow_downward"){
+            document.getElementById('species-table').style.display = "none";
+            document.getElementById('proteinResultsBySpemud').style.display = "block";
+            document.getElementById(id).children[0].innerHTML="arrow_upward";
+        }
+        else {
+            document.getElementById('species-table').style.display="block";
+            document.getElementById('proteinResultsBySpemud').style.display = "none";
+            document.getElementById(id).children[0].innerHTML="arrow_downward";
+        }
+    }
+    function changeText(id) {
+        var btn = document.getElementById(id);
+        if(btn.value != 'selected' && selected_list.length < 2 ){
+            btn.value = 'selected'; // will just add a hidden value
+            btn.innerHTML = 'Selected';
+            btn.classList.remove("lighten-3");
+            btn.classList.add("darken-3");
+            selected_list.push(id);
+        }
+        else if(btn.value == 'selected') {
+            btn.value = 'unselected'; // will just add a hidden value
+            btn.innerHTML = 'Select';
+            btn.classList.add("lighten-3");
+            btn.classList.remove("darken-3");
+            selected_list = selected_list.filter(item => item !== id)
+
+        }
+        else{
+            alert("Select just two specie");
+        }
+
+        if(selected_list.length==2 && document.getElementById("showResults").classList.contains('disabled')) {
+            $("#showResults").removeClass("disabled");
+            $("#showResults").addClass("enabled");
+        }
+        else if(selected_list.length<2 && !document.getElementById("showResults").classList.contains('disabled')) {
+            $("#showResults").removeClass("enabled");
+            $("#showResults").addClass("disabled");
+        }
+    }
+
 $(document).ready(function() {
     /// ratio button kısmına bakılmalı.
+    // var human_radio_buttons = document.getElementsByName("human");
     var mouse_radio_buttons = document.getElementsByName("mouse");
     var worm_radio_buttons = document.getElementsByName("worm");
 
+    //  document.getElementById('human').style.display = 'none';
     document.getElementById('mouse').style.display = 'none';
     document.getElementById('worm').style.display = 'none';
+
+    /*for (human_radio of human_radio_buttons) {
+        human_radio.parentNode.style.display = 'none';
+    };*/
 
     for (mouse_radio of mouse_radio_buttons) {
         mouse_radio.parentNode.style.display = 'none';
