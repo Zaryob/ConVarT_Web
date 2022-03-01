@@ -16,8 +16,6 @@ if ($human_convart_id == "" && $mouse_convart_id == "" && $worm_convart_id == ""
     exit;
 
 $str_convart_ids = implode(",", $convart_id_list);
-error_log("Convart IDS: '$convart_id_list'");
-error_log("STR Convart IDS:'$str_convart_ids'");
 
 #Get MSA
 mysqli_query($db_connection, "SET profiling = 1;");
@@ -27,13 +25,10 @@ mysqli_query($db_connection, "SET profiling = 1;");
 #
 
 $msaIdQuery = mysqli_query($db_connection, "SELECT CONCAT(t1.convart_gene_id, \",\" , t2.convart_gene_id) AS ids, t1.msa_id FROM msa_gene t1 CROSS JOIN msa_gene t2 WHERE t1.msa_id=t2.msa_id AND t1.convart_gene_id!=t2.convart_gene_id AND t1.convart_gene_id < t2.convart_gene_id HAVING ids='$str_convart_ids' LIMIT 1");
-error_log("query: SELECT CONCAT(t1.convart_gene_id, \",\", t2.convart_gene_id) AS ids, t1.msa_id FROM msa_gene t1 CROSS JOIN msa_gene t2 WHERE t1.msa_id=t2.msa_id AND t1.convart_gene_id!=t2.convart_gene_id AND t1.convart_gene_id < t2.convart_gene_id HAVING ids='$str_convart_ids' LIMIT 1");
 
 if (mysqli_num_rows($msaIdQuery) == 0) {
 
     $msaIdQuery = mysqli_query($db_connection, "SELECT GROUP_CONCAT(convart_gene_id) AS ids, msa_id FROM msa_gene GROUP BY msa_id HAVING ids = '$human_convart_id' LIMIT 1");
-    error_log("Human Convart IDS:'$human_convart_id'");
-    error_log("query: SELECT GROUP_CONCAT(convart_gene_id) AS ids, msa_id FROM msa_gene GROUP BY msa_id HAVING ids = '$human_convart_id' LIMIT 1");
 
 
     if (mysqli_num_rows($msaIdQuery) == 0) {

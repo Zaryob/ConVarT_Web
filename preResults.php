@@ -4,17 +4,13 @@
     require_once("config.php");
     #Capture the term searched for spemud
     $spemud_searchText = trim($_GET['spemud']);
-error_log("line 7 - spemud_searchText: ". $spemud_searchText);
 
-$spemud_searchText = preg_replace("#[^0-9a-z_\-.:]i#","", $spemud_searchText);
-error_log("line 10 - spemud_searchText: ". $spemud_searchText);
+    $spemud_searchText = preg_replace("#[^0-9a-z_\-.:]i#","", $spemud_searchText);
 
-#Capture the term searched for other search
+    #Capture the term searched for other search
     $searchText = trim($_GET['q']);
-error_log("line 14 - searchText: ". $searchText);
 
-$searchText = preg_replace("#[^0-9a-z_\-.:]i#","", $searchText);
-error_log("line 17 - searchText: ". $searchText);
+    $searchText = preg_replace("#[^0-9a-z_\-.:]i#","", $searchText);
 
     if($searchText == ""  && $spemud_searchText == ""){
         exit;
@@ -58,7 +54,6 @@ error_log("line 17 - searchText: ". $searchText);
             }
         }
         $spemud_searchText = $orthoId;
-        error_log("line 61 - searchText: ". $spemud_searchText);
 
     }
 
@@ -227,7 +222,6 @@ error_log("line 17 - searchText: ". $searchText);
             document.getElementById(id).children[0].innerHTML="arrow_upward";
 
             clearForm();
-            console.log(selected_specie_button_list);
 
             document.getElementById("startAnalyse").style.display='block';
             if (selected_specie_button_list.includes('_human_specie_button')){
@@ -329,7 +323,6 @@ $(document).ready(function() {
 
 
     $("form :input").change(function() {
-        console.log("changed selection");
         $("#startAnalyse").addClass("disabled");
 
         var paras = document.getElementsByClassName('alert');
