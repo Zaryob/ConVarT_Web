@@ -947,7 +947,7 @@ function search_spemud_proteins($spemud_value)
 						$variation_count = getWormVariationCount($temp_prot_ids);
 					}
                     
-                    $spemud_radio_button = "<div class='convart-radio'><input id='$key-$temp_convart_ids' name='$key' class='check' value='$temp_convart_ids' type='checkbox' /> <label style='color:$colors[$colId];' for='$key-$temp_convart_ids'>GeneID: $tempGeneIds | $temp_gene_symbol | $temp_prot_ids | $variation_count</label></div>";
+                    $spemud_radio_button = "<div class='convart-radio'><input id='$key-$temp_convart_ids' name='$key' class='check' value='$temp_convart_ids' type='radio' /> <label style='color:$colors[$colId];' for='$key-$temp_convart_ids'>GeneID: $tempGeneIds | $temp_gene_symbol | $temp_prot_ids | $variation_count</label></div>";
                     
 					$row_input = array($spemud_radio_button, $variation_count);
 					array_push($html_outputs, $row_input);
