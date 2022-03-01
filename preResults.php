@@ -214,89 +214,122 @@ error_log("line 17 - searchText: ". $searchText);
 
 <script type="text/javascript">
 
-    let selected_list=[]
+    let selected_specie_button_list=[];
+
+    let human_radio_buttons = document.getElementsByName("human");
+    let mouse_radio_buttons = document.getElementsByName("mouse");
+    let worm_radio_buttons = document.getElementsByName("worm");
+
     function changeResults(id) {
         if(document.getElementById(id).children[0].innerHTML=="arrow_downward"){
             document.getElementById('species-table').style.display = "none";
             document.getElementById('proteinResultsBySpemud').style.display = "block";
             document.getElementById(id).children[0].innerHTML="arrow_upward";
+
+            clearForm();
+            console.log(selected_specie_button_list);
+
+            document.getElementById("startAnalyse").style.display='block';
+            if (selected_specie_button_list.includes('_human_specie_button')){
+                document.getElementById('human').style.display = 'block';
+                for (human_radio of human_radio_buttons) {
+                    human_radio.parentNode.style.display = 'block';
+                    human_radio.checked = false;
+                };
+            }
+
+            if (selected_specie_button_list.includes('_mouse_specie_button')){
+                document.getElementById('mouse').style.display = 'block';
+                for (mouse_radio of mouse_radio_buttons) {
+                    mouse_radio.parentNode.style.display = 'block';
+                    mouse_radio.checked = false;
+                };
+            }
+
+            if (selected_specie_button_list.includes('_worm_specie_button')){
+                document.getElementById('worm').style.display = 'block';
+                for (worm_radio of worm_radio_buttons) {
+                    worm_radio.parentNode.style.display = 'block';
+                    worm_radio.checked = false;
+                };
+            }
         }
         else {
+            document.getElementById("startAnalyse").style.display="none";
+            $("#startAnalyse").addClass("disabled");
             document.getElementById('species-table').style.display="block";
             document.getElementById('proteinResultsBySpemud').style.display = "none";
             document.getElementById(id).children[0].innerHTML="arrow_downward";
+            selected_species=[];
         }
     }
+
     function changeText(id) {
         var btn = document.getElementById(id);
-        if(btn.value != 'selected' && selected_list.length < 2 ){
+        if(btn.value != 'selected' && selected_specie_button_list.length < 2 ){
             btn.value = 'selected'; // will just add a hidden value
             btn.innerHTML = 'Selected';
             btn.classList.remove("lighten-3");
             btn.classList.add("darken-3");
-            selected_list.push(id);
+            selected_specie_button_list.push(id);
         }
         else if(btn.value == 'selected') {
             btn.value = 'unselected'; // will just add a hidden value
             btn.innerHTML = 'Select';
             btn.classList.add("lighten-3");
             btn.classList.remove("darken-3");
-            selected_list = selected_list.filter(item => item !== id)
+            selected_specie_button_list = selected_specie_button_list.filter(item => item !== id)
 
         }
         else{
             alert("Select just two specie");
         }
 
-        if(selected_list.length==2 && document.getElementById("showResults").classList.contains('disabled')) {
+        if(selected_specie_button_list.length==2 && document.getElementById("showResults").classList.contains('disabled')) {
             $("#showResults").removeClass("disabled");
             $("#showResults").addClass("enabled");
         }
-        else if(selected_list.length<2 && !document.getElementById("showResults").classList.contains('disabled')) {
+        else if(selected_specie_button_list.length<2 && !document.getElementById("showResults").classList.contains('disabled')) {
             $("#showResults").removeClass("enabled");
             $("#showResults").addClass("disabled");
         }
     }
+    function clearForm() {
+        /// ratio button kısmına bakılmalı.
+
+        document.getElementById('human').style.display = 'none';
+        document.getElementById('mouse').style.display = 'none';
+        document.getElementById('worm').style.display = 'none';
+
+        for (human_radio of human_radio_buttons) {
+            human_radio.parentNode.style.display = 'none';
+            human_radio.checked = false;
+        };
+
+        for (mouse_radio of mouse_radio_buttons) {
+            mouse_radio.parentNode.style.display = 'none';
+            mouse_radio.checked = false;
+
+        };
+
+        for (worm_radio of worm_radio_buttons) {
+            worm_radio.parentNode.style.display = 'none';
+            worm_radio.checked = false;
+        };
+
+    }
 
 $(document).ready(function() {
-    /// ratio button kısmına bakılmalı.
-    // var human_radio_buttons = document.getElementsByName("human");
-    var mouse_radio_buttons = document.getElementsByName("mouse");
-    var worm_radio_buttons = document.getElementsByName("worm");
-
-    //  document.getElementById('human').style.display = 'none';
-    document.getElementById('mouse').style.display = 'none';
-    document.getElementById('worm').style.display = 'none';
-
-    /*for (human_radio of human_radio_buttons) {
-        human_radio.parentNode.style.display = 'none';
-    };*/
-
-    for (mouse_radio of mouse_radio_buttons) {
-        mouse_radio.parentNode.style.display = 'none';
-    };
-
-    for (worm_radio of worm_radio_buttons) {
-        worm_radio.parentNode.style.display = 'none';
-    };
 
 	$('.modal').modal();
+
+    document.getElementById("startAnalyse").style.display="none";
     $("#startAnalyse").addClass("disabled");
+
+
+
     $("form :input").change(function() {
-
-        // check just two genes at the same time
-        var checks = document.querySelectorAll(".check");
-        var max = 2;
-        for (var i = 0; i < checks.length; i++)
-            checks[i].onclick = selectiveCheck;
-        function selectiveCheck (event) {
-            var checkedChecks = document.querySelectorAll(".check:checked");
-            if (checkedChecks.length >= max + 1)
-                return false;
-        }
-
-        speciesList = ['human', 'mouse', 'worm'];
-
+        console.log("changed selection");
         $("#startAnalyse").addClass("disabled");
 
         var paras = document.getElementsByClassName('alert');
@@ -304,90 +337,20 @@ $(document).ready(function() {
         while(paras[0]) {
             paras[0].parentNode.removeChild(paras[0]);
         };
-        
-        selectedSpeciesCount = 0; //must be 3 for the analysis
-        availableSpeciesCount = 0;
 
-        if($(this).attr('id').startsWith('human')) {
-            for (mouse_radio of mouse_radio_buttons) {
-                mouse_radio.parentNode.style.display = 'none';
-                mouse_radio.checked = false;
-            };
-
-            for (worm_radio of worm_radio_buttons) {
-                worm_radio.parentNode.style.display = 'none';
-                worm_radio.checked = false;
-            };
-        }
-
-        selected_cb = $(this).attr('id');
-        selected_cb_color = $('label[for=' + selected_cb +']').css('color');
-
-        document.getElementById('mouse').style.display = 'block';
-        document.getElementById('worm').style.display = 'block';
-
-        all_radio_buttons = document.getElementsByClassName('convart-radio');
-
-        available_mouse = 0;
-        available_worm = 0;
-
-        selected_first_mouse = true;
-        selected_first_worm = true;
-
-        first_available_mouse = -1
-        first_available_worm = -1
-
-        for (radio_button of all_radio_buttons) {
-            radio_button_input = $(radio_button.childNodes[0]);
-            radio_button_label = $(radio_button.childNodes[2]);
-
-            if (radio_button_label.css('color') === selected_cb_color) {
-                radio_button.style.display = 'block';
-                if(radio_button_input.attr('id').startsWith('mouse')){
-                    if (selected_first_mouse) {
-                        first_available_mouse = radio_button_input.attr('id')
-                    }
-                    selected_first_mouse = false;
-                    available_mouse++;
-                }
-                if(radio_button_input.attr('id').startsWith('worm')){
-                    if (selected_first_worm) {
-                        first_available_worm = radio_button_input.attr('id')
-                    }
-                    selected_first_worm = false;
-                    available_worm++;
+        var checked_elements=0;
+        for (radio_button of document.getElementsByClassName("check")){
+            if (radio_button.checked){
+                checked_elements++;
+                if(checked_elements==2){
+                    $("#startAnalyse").removeClass("disabled");
                 }
             }
-        };
-
-
-        if (available_mouse === 0) {
-            document.getElementById('mouse').insertAdjacentHTML('afterend','<h5 class="alert" >No homolog transcript found for this species.<br><br></h5>');
         }
 
-        if (available_worm === 0) {
-            document.getElementById('worm').insertAdjacentHTML('afterend','<h5 class="alert" >No homolog transcript found for this species.<br><br></h5>');
-        }
-
-        /*
-        Undefined because we dont need automatically look up genes.
-        if($(this).attr('id').startsWith('human')) {
-            if (first_available_mouse !== -1) {
-                document.getElementById(first_available_mouse).checked = true;
-            }
-
-            if (first_available_worm !== -1) {
-                document.getElementById(first_available_worm).checked = true;
-            }
-        }
-        */
-
-
-        $("#startAnalyse").removeClass("disabled");
     });
     
 });
-
 
 // setTimeout(function() {
 //    $("form :input").trigger('change');
