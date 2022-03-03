@@ -123,27 +123,26 @@
                 <div class="row" id="species-table">
                     <?php
                     # $speciesList = ['human', 'mouse', 'worm', 'other1', 'other2', 'other3'];
-                    $speciesList = ['human', 'mouse', 'worm'];
+                     $speciesList = array(
+                            "human" => "Homo sapiens",
+                            "mouse" => "Mus musculus",
+                            "worm" => "Caenorhabditis elegans",
+                        );
 
-                    foreach ($speciesList as $specie) { ?>
+
+                    foreach ($speciesList as $specie => $slatin) { ?>
 
 
                         <div class="col l4 s8 m4">
                             <div class="card specie-select">
                                 <div class="card-image">
-                                    <img src="files/img/convart.png">
+                                    <img src="files/img/species/<?php echo $specie ?>.png">
                                 </div>
                                 <div class="card-content">
-                                    <span class="card-title activator grey-text text-darken-4"><?php echo $specie ?><i
-                                                class="material-icons right">more_vert</i></span>
+                                    <span class="card-title activator grey-text text-darken-4"><?php echo $slatin ?></span>
                                 </div>
-                                <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4"><?php echo $specie ?><i
-                                                class="material-icons right">close</i></span>
-                                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                                </div>
-                                <button
-                                        class="waves-effect waves-light btn blue lighten-3" id="_<?php echo $specie ?>_specie_button" type="button" value="unselected" style="width: 100%" onclick="changeText(this.id);">Select</button>
+
+                                <button class="waves-effect waves-light btn blue lighten-3" id="_<?php echo $specie ?>_specie_button" type="button" value="unselected" style="width: 100%" onclick="changeText(this.id);">Select</button>
 
                             </div>
                         </div>
