@@ -450,20 +450,32 @@ h4 {
 
 }
 
-
-.table-of-contents-item {
- background: #fff; 
- border-bottom: 1px solid #1976D2;
- padding-top: 3px;
- line-height: 1.2em;
+.table-of-contents-div{
+    width:30%;
+    border-top: 1px dashed #263d4f;
+    border-bottom: 1px dashed #fff;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
-#table-of-contents {
- background: #f2f2f2; 
+
+.table-of-contents-item{
+    background: #f2f2f2;
+}
+
+.table-of-contents-item.active {
+    color: #1976D2;
+}
+
+.table-of-contents {
+ background: #f2f2f2;
  padding-right: 0;
  padding-left: 0;
  border: 1px solid #ccc;
 }
 
+.table-of-contents li a {
+    color: #70abe8;
+}
 
 @media only screen and (max-width: 992px){
 #table-of-contents {

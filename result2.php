@@ -232,22 +232,20 @@ if ($_GET['test']) {
 
 
 <!-- Current Project | Tables and Other Components -->
-<div class="row TablesContainer" style="position:relative; margin-left: 15%;">
+<div class="row TablesContainer" style="position:relative; margin-left: 18%;">
 <div class="col s1 m1 l1" style="
     position: fixed;
     left: 15px;
-    height:75%;
-    width: 13.5%;
+    max-height: 60%;
+    width: 16.5%;
     overflow: scroll;
     /* top: 0; */
 " id="table-of-contents">
 
-    
-
 </div>
     <!-- Current Project Tool  -->
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">format_align_center</i>ConVarT</div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy active collapsible-header"><i class="material-icons">format_align_center</i>ConVarT</div>
 
         <div class="collapsible-body">
             <div class="row resultGeneBox">
@@ -316,8 +314,8 @@ if ($_GET['test']) {
         <br>
     </div>
     <!-- Gene Info --->
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">info</i>Gene Info</div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy collapsible-header"><i class="material-icons">info</i>Gene Info</div>
         <div class="collapsible-body">
             <!-- Current Project | Result Box - Gene Card -->
 
@@ -425,8 +423,8 @@ if ($_GET['test']) {
     </div>
 
 	<!-- GO Annotation Table -->
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">import_contacts</i>Gene Ontology Annotations</div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy collapsible-header"><i class="material-icons">import_contacts</i>Gene Ontology Annotations</div>
         <div class="collapsible-body">
             <div id="go_annotation_chart"></div>
             <div class="table-wrapper">
@@ -451,8 +449,10 @@ if ($_GET['test']) {
 	
 
     <!-- ClinVar Table -->
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">import_contacts</i>ClinVar Data <a href="#clinical_significance_classification_help" class="modal-trigger tooltipped" data-position="right" data-delay="10" data-tooltip="Classification of Clinicial Significance of ClinVar Data"><i class="material-icons white-text text-darken-1">help</i></a></div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy collapsible-header"><i class="material-icons">import_contacts</i>ClinVar Data
+            <a href="#clinical_significance_classification_help" class="modal-trigger tooltipped" data-position="right" data-delay="10" data-tooltip="Classification of Clinicial Significance of ClinVar Data"><i class="material-icons white-text text-darken-1">help</i></a>
+        </div>
         <div class="collapsible-body">
             <div id="clinvar_chart"></div>
             <div class="table-wrapper">
@@ -481,8 +481,8 @@ if ($_GET['test']) {
     </div>
 
     <!-- gnomAD table -->
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">healing</i>gnomAD</div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy collapsible-header"><i class="material-icons">healing</i>gnomAD</div>
         <div class="collapsible-body">
             <div id="gnomad_chart"></div>
             <div class="table-wrapper">
@@ -510,8 +510,8 @@ if ($_GET['test']) {
     </div>
 
     <!-- PTM table -->
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">place</i>Post-translational Modifications (PTMs)</div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy collapsible-header"><i class="material-icons">place</i>Post-translational Modifications (PTMs)</div>
         <div class="collapsible-body">
             <div id="ptm_chart"></div>
             <div class="table-wrapper">
@@ -537,8 +537,8 @@ if ($_GET['test']) {
     </div>
 
     <!-- COSMIC table -->
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">blur_on</i>Catalogue of Somatic Mutations in Cancer (COSMIC)</div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy collapsible-header"><i class="material-icons">blur_on</i>Catalogue of Somatic Mutations in Cancer (COSMIC)</div>
         <div class="collapsible-body">
             <div id="cosmic_chart"></div>
             <div class="table-wrapper">
@@ -571,8 +571,8 @@ if ($_GET['test']) {
     </div>
 
     <!-- Community Table -->
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">import_contacts</i>Community Data </div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy collapsible-header"><i class="material-icons">import_contacts</i>Community Data </div>
         <div class="collapsible-body">
             <div class="table-wrapper">
                 <table id="CommunityTable" class="special_table hide">
@@ -598,8 +598,8 @@ if ($_GET['test']) {
     <br></div>
 
 <!-- TopMed table --> 
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">chrome_reader_mode</i>TopMed</div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy collapsible-header"><i class="material-icons">chrome_reader_mode</i>TopMed</div>
         <div class="collapsible-body">
             <div id="TopMed_chart"></div>
             <div class="table-wrapper">
@@ -624,8 +624,8 @@ if ($_GET['test']) {
     </div>
 
     <!-- dbSNP table -->
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">chrome_reader_mode</i>dbSNP</div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy collapsible-header"><i class="material-icons">chrome_reader_mode</i>dbSNP</div>
         <div class="collapsible-body">
             <div id="dbSNP_chart"></div>
             <div class="table-wrapper">
@@ -649,8 +649,9 @@ if ($_GET['test']) {
     </div>
 
     <!-- Mouse Variants table -->
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">healing</i>Mouse Variants</div>
+    <?php if (!empty($geneDetailsMouse)): ?>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy collapsible-header"><i class="material-icons">healing</i>Mouse Variants</div>
         <div class="collapsible-body">
             <div id="mouseVariants_chart"></div>
             <div class="table-wrapper">
@@ -674,10 +675,12 @@ if ($_GET['test']) {
             </div>
         </div><br>
     </div>
+    <?php endif; ?>
 
+    <?php if (!empty($geneDetailsWorm)): ?>
     <!-- C.elegans variants table -->
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">healing</i>C elegans Variants</div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy collapsible-header"><i class="material-icons">healing</i>C. elegans Variants</div>
         <div class="collapsible-body">
             <div id="cel_chart"></div>
             <div class="table-wrapper">
@@ -701,10 +704,12 @@ if ($_GET['test']) {
             </div>
         </div><br>
     </div>
+    <?php endif; ?>
+
 
     <!-- Domains Table -->
-    <div class="col s12 m12 l12">
-        <div class="collapsible-header active"><i class="material-icons">format_align_center</i>Protein Domains (PFAM)</div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <div class="section scrollspy collapsible-header"><i class="material-icons">format_align_center</i>Protein Domains (PFAM)</div>
         <div class="collapsible-body">
             <div class="table-wrapper">
                 <table id="DomainTable" class="special_table">
@@ -748,9 +753,9 @@ if ($_GET['test']) {
     </div>
 
     <!-- Diseases and Genes Table -->
-    <div class="col s12 m12 l12">
-        <!-- <div class="collapsible-header active"><i class="material-icons">view_list</i>Diseases for Human Homolog (<?= strstr(printify($humanGeneDetails['gene_symbol']), ',', true); ?>) of the Gene (<?= printify($geneDetails['gene_symbol']); ?> - <?= ucfirst($geneDetails['species_id']); ?>)</div> -->
-        <div class="collapsible-header active"><i class="material-icons">view_list</i>List of the diseases from DisGeNET</div>
+    <div class="col s12 m12 l12 section scrollspy active">
+        <!-- <div class="section scrollspy collapsible-header"><i class="material-icons">view_list</i>Diseases for Human Homolog (<?= strstr(printify($humanGeneDetails['gene_symbol']), ',', true); ?>) of the Gene (<?= printify($geneDetails['gene_symbol']); ?> - <?= ucfirst($geneDetails['species_id']); ?>)</div> -->
+        <div class="section scrollspy collapsible-header"><i class="material-icons">view_list</i>List of the diseases from DisGeNET</div>
 
         <div class="collapsible-body">
             <center><input type="text" class="quick_search" id="quick_search_diseases" placeholder="Search in the table "></center>
@@ -1577,35 +1582,50 @@ if ($_GET['test']) {
 
     }
     function createTableOfContents() {
-    all_follibles = $('.col.s12:visible .collapsible-header.active')
-    all_text = "<table class='special_table'><tr><th>Table of Contents</th></tr>";
-    for ( i in all_follibles){ 
-        if (all_follibles[i].innerHTML == undefined )
-            break;
-        title= all_follibles[i].innerHTML.replace(/<i class=\"(.*?)\">(.*?)<\/i>/i, '').replace(/<a (.*?) class=\"(.*?)\">(.*?)<\/i>/i, '').replace('  ', '');
-        id = title.toLowerCase().replace(' ', '-').replace("'", '').replace('"', '')
-        $(all_follibles[i]).parent().attr('id', 'content-'+id);
-        all_text += '<tr><td><a href="#content-'+id+'"">'+title + '</td></tr>';
-    }
-    all_text += '</table>';
-    $('#table-of-contents').html(all_text);
+
+        follible_div="<div class='col hide-on-small-only m3 l3'>";
+
+        all_follibles = $('.col.s12:visible .scrollspy');
+
+        all_text = "<div class='collapsible-header'><i class='material-icons'>clear_all</i>Table of Contents</div>";
+        all_text += "<ul class='section table-of-contents'>";
+
+
+        for ( i in all_follibles){
+            if (all_follibles[i].innerHTML == undefined )
+                break;
+            title= all_follibles[i].innerHTML.replace(/<i class=\"(.*?)\">(.*?)<\/i>/i, '').replace(/<a (.*?) class=\"(.*?)\">(.*?)<\/a>/i, '').replace('  ', '');
+            id = title.toLowerCase().replace(' ', '-').replace("'", '').replace('"', '');
+            $(all_follibles[i]).attr('id', 'content-'+id);
+            all_text += '<li><a class="table-of-contents-item" href="#content-'+id+'"> '+title + '</a></li>';
+            if(i<all_follibles.length-1){
+                all_text += "<hr class='table-of-contents-div'>";
+            }
+        }
+        all_text += '</ul>';
+        $('#table-of-contents').html(all_text);
     }
     createTableOfContents();
+
+
     setTimeout(createTableOfContents, 1500);
     function offsetAnchor() {
        if(location.hash.length !== 0) {
             window.scrollTo(window.scrollX, window.scrollY - 200);
         }
     }
-    // This will capture hash changes while on the page
+    // This will capture hash changes while on the page2
     window.addEventListener("hashchange", offsetAnchor);
 
-// This is here so that when you enter the page with a hash,
-// it can provide the offset in that case too. Having a timeout
-// seems necessary to allow the browser to jump to the anchor first.
-window.setTimeout(offsetAnchor, 1); // The delay of 1 is arbitrary and may not always work right (although it did in my testing).
 
+    // This is here so that when you enter the page with a hash,
+    // it can provide the offset in that case too. Having a timeout
+    // seems necessary to allow the browser to jump to the anchor first.
+    window.setTimeout(offsetAnchor, 1); // The delay of 1 is arbitrary and may not always work right (although it did in my testing).
 
+    $(document).ready(function(){
+        $('.scrollspy').scrollSpy();
+    });
 </script>
 
 <?php require("footer.php"); ?>
