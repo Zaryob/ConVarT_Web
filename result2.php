@@ -228,6 +228,7 @@ if ($_GET['test']) {
         echo "<br>";
     }
 }
+
 ?>
 
 
@@ -298,6 +299,7 @@ if ($_GET['test']) {
                     <div id="dynamic_chart"></div>
                 </div>
             </div> <!-- end of gene card -->
+            
             <iframe id="CurrentProjectTool2" src="tool.php?msa_id=<?= $msa_id; ?>&human=<?= $_GET['human']; ?>&mouse=<?= $_GET['mouse']; ?>&worm=<?= $_GET['worm']; ?>&version=2" width="96%" style="min-height:430px; height:auto !important" frameborder="0"></iframe>
             <p>
   ∙ Conservation scores are calculated by (number of aminoacids that matches between Human & the compared species ) / (aminoacid count in the human gene)
@@ -918,7 +920,7 @@ if ($_GET['test']) {
                 "searchDelay": 600,
 
                 <?php if (isset($humanGeneDetails['dbs']['NP'])) : ?> "ajax": {
-                        "url": "<?= $GLOBALS['base_url']; ?>/api.php?action=clinvar&id=<?= urlencode(normalizeIds($humanGeneDetails['dbs']['NP'])); ?>",
+                        "url": "<?= $GLOBALS['base_url']; ?>api.php?action=clinvar&id=<?= urlencode(normalizeIds($humanGeneDetails['dbs']['NP'])); ?>",
                         "type": "GET"
                     },
                 <?php endif; ?> "deferRender": true,
@@ -962,7 +964,7 @@ if ($_GET['test']) {
             "serverSide": false,
             "pageLength": 20,
 
-            <?php if (isset($humanGeneDetails['dbs']['ENST'])) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>/api.php?action=gnomad&id=<?= urlencode(normalizeIds($humanGeneDetails['dbs']['ENST'])); ?>",
+            <?php if (isset($humanGeneDetails['dbs']['ENST'])) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>api.php?action=gnomad&id=<?= urlencode(normalizeIds($humanGeneDetails['dbs']['ENST'])); ?>",
             <?php endif; ?> "columnDefs": [{
                 "targets": 0,
                 "render": function(data, type, row) {
@@ -1001,7 +1003,7 @@ if ($_GET['test']) {
 
             
 			<?php if (isset($other_idHuman) || isset($other_idMouse) || isset($other_idWorm)) : ?>
-			"ajax": "<?= $GLOBALS['base_url']; ?>/api.php?action=go_annotation&id=<?= "%22",urlencode($other_idHuman),"%22,%22", urlencode($other_idMouse), "%22,%22",urlencode($other_idWorm),"%22"; ?>",
+			"ajax": "<?= $GLOBALS['base_url']; ?>api.php?action=go_annotation&id=<?= "%22",urlencode($other_idHuman),"%22,%22", urlencode($other_idMouse), "%22,%22",urlencode($other_idWorm),"%22"; ?>",
             <?php endif; ?>
             "columnDefs": [{
 				"targets": 0,
@@ -1034,7 +1036,7 @@ if ($_GET['test']) {
 
             
 			<?php if (isset($humanGeneDetails['dbs']['NP']) || isset($dbIds_mouse) || isset($transcriptIdWorm)) : ?>
-			"ajax": "<?= $GLOBALS['base_url']; ?>/api.php?action=community&id=<?= urlencode($humanGeneDetails['dbs']['NP']),",%22", urlencode($dbIds_mouse), "%22,%22",urlencode($transcriptIdWorm),"%22"; ?>",
+			"ajax": "<?= $GLOBALS['base_url']; ?>api.php?action=community&id=<?= urlencode($humanGeneDetails['dbs']['NP']),",%22", urlencode($dbIds_mouse), "%22,%22",urlencode($transcriptIdWorm),"%22"; ?>",
             <?php endif; ?>
             "columnDefs": [{
                 "targets": 3,
@@ -1074,7 +1076,7 @@ if ($_GET['test']) {
             "serverSide": false,
             "pageLength": 20,
 
-            <?php if (isset($dbIds_mouse)) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>/api.php?action=mouseVariants&id=<?= urlencode(normalizeIds($dbIds_mouse)); ?>",
+            <?php if (isset($dbIds_mouse)) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>api.php?action=mouseVariants&id=<?= urlencode(normalizeIds($dbIds_mouse)); ?>",
             <?php endif; ?> 
 			"columnDefs": [{
                 "targets": 4,
@@ -1119,7 +1121,7 @@ if ($_GET['test']) {
             "serverSide": false,
             "pageLength": 20,
 
-            <?php if (isset($transcriptIdWorm)) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>/api.php?action=celVariants&id=<?= urlencode(normalizeIds($transcriptIdWorm)); ?>",
+            <?php if (isset($transcriptIdWorm)) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>api.php?action=celVariants&id=<?= urlencode(normalizeIds($transcriptIdWorm)); ?>",
             <?php endif; ?> "columnDefs": [{
                 "targets": 3,
                 "render": function(data, type, row) {
@@ -1154,7 +1156,7 @@ if ($_GET['test']) {
                 "processing": false,
                 "serverSide": false,
                 "pageLength": 20,
-                <?php if (isset($humanGeneDetails['dbs']['UNIPROT'])) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>/api.php?action=ptm&id=<?= urlencode(normalizeIds($humanGeneDetails['dbs']['UNIPROT'])); ?>",
+                <?php if (isset($humanGeneDetails['dbs']['UNIPROT'])) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>api.php?action=ptm&id=<?= urlencode(normalizeIds($humanGeneDetails['dbs']['UNIPROT'])); ?>",
                 <?php endif; ?> "columnDefs": [{
                     "targets": 3,
                     "render": function(data, type, row) {
@@ -1179,7 +1181,7 @@ if ($_GET['test']) {
                 "processing": false,
                 "serverSide": false,
                 "pageLength": 20,
-                <?php if (isset($humanGeneDetails['dbs']['ENST'])) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>/api.php?action=TopMed&id=<?= urlencode(normalizeIds($humanGeneDetails['dbs']['ENST'])); ?>",
+                <?php if (isset($humanGeneDetails['dbs']['ENST'])) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>api.php?action=TopMed&id=<?= urlencode(normalizeIds($humanGeneDetails['dbs']['ENST'])); ?>",
                 <?php endif; ?> "columnDefs": [{
                     "targets": 1,
                     "render": function(data, type, row) {
@@ -1212,7 +1214,7 @@ if ($_GET['test']) {
                 "processing": false,
                 "serverSide": false,
                 "pageLength": 20,
-                <?php if (isset($humanGeneDetails['dbs']['ENST'])) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>/api.php?action=dbSNP&id=<?= urlencode(normalizeIds($humanGeneDetails['dbs']['ENST'])); ?>",
+                <?php if (isset($humanGeneDetails['dbs']['ENST'])) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>api.php?action=dbSNP&id=<?= urlencode(normalizeIds($humanGeneDetails['dbs']['ENST'])); ?>",
                 <?php endif; ?> "columnDefs": [{
                     "targets": 1,
                     "render": function(data, type, row) {
@@ -1246,7 +1248,7 @@ if ($_GET['test']) {
                 "serverSide": true,
                 "pageLength": 20,
                 <?php if (isset($humanGeneDetails['dbs']['ENST'])) : ?> "ajax": {
-                        "url": "<?= $GLOBALS['base_url']; ?>/api.php?action=cosmic&id=<?= urlencode(normalizeIds($humanGeneDetails['dbs']['ENST'])); ?>",
+                        "url": "<?= $GLOBALS['base_url']; ?>api.php?action=cosmic&id=<?= urlencode(normalizeIds($humanGeneDetails['dbs']['ENST'])); ?>",
                         "type": "GET"
                     },
                 <?php endif; ?> "deferRender": true,

@@ -247,7 +247,6 @@ if ($countForDomains == 0) {
 
     var viewer = new MSAViewer(id, fasta, geneSymbol, variations, domains);
     // TODO: Load these things from AJAX
-
     /* List the viewer.addVariation Data */
     <?php
 
