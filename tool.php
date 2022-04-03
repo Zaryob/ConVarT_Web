@@ -53,10 +53,10 @@ function computeConservationScore($fasta, $comparisonX, $comparisonY) {
 
   $humanAminoAcidLength = 0;
   for($i =0; $i < strlen($processedFastas[0]); $i++){
-    
+
     if($processedFastas[0][$i] != '-')
       $humanAminoAcidLength++;
-    
+
   }
   return $conservation / $humanAminoAcidLength;
 }
@@ -209,7 +209,7 @@ if ($countForDomains == 0) {
 
   <!-- Current Project Tool -->
   <section id="CurrentProjectTool">
-    
+
   </section><!-- end of Current Project tool -->
   <?php if($orthovar && ($mouse || $worm)): ?>
     <section style="float:left; width:300px">
@@ -228,11 +228,11 @@ if ($countForDomains == 0) {
       <div class="bar" style="width:<?= $conservationScoreThirdSequence; ?>%">
         <p class="percent"><?= $conservationScoreThirdSequence; ?>%</p>
       </div>
-    </div> 
+    </div>
   </section>
   <?php endif; ?>
   <?php if($orthovar  && ($mouse || $worm)): ?>
- <div style ="clear:both"></div>  
+ <div style ="clear:both"></div>
   <?php endif; ?>
 
   <!-- Current Project Tool -->
@@ -246,6 +246,7 @@ if ($countForDomains == 0) {
     ]
 
     var viewer = new MSAViewer(id, fasta, geneSymbol, variations, domains);
+
     // TODO: Load these things from AJAX
     /* List the viewer.addVariation Data */
     <?php
@@ -327,7 +328,7 @@ if ($countForDomains == 0) {
           $position  = 0;
         } else {
           $position = preg_replace("/[^0-9]/", "", $position);
-        }      
+        }
       ?>
       viewer.addVariation(0, <?php echo $position; ?>, '<?php echo $significance; ?>', 'HM');
     <?php endwhile; ?>
@@ -344,11 +345,11 @@ if ($countForDomains == 0) {
           $position  = 0;
         } else {
           $position = preg_replace("/[^0-9]/", "", $position);
-        }      
+        }
       ?>
       viewer.addVariation(0, <?php echo $position; ?>, '<?php echo $significance; ?>', 'HC');
     <?php endwhile; ?>
-	
+
 	/* List Community Data */
 	<?php
     if (isset($humanNPid) || isset($mouseNPid) || isset($wormNPid)) :
@@ -373,7 +374,7 @@ if ($countForDomains == 0) {
         viewer.addVariation(<?php echo $indexID; ?>, <?php echo $position; ?>, '<?php echo $CommunityNote; ?>', 'Community');
       <?php endwhile; ?>
     <?php endif; ?>
-  
+
   /* List the COSMIC Data */
     <?php
     if (isset($geneDetails['dbs']['ENST'])) :
@@ -407,7 +408,7 @@ if ($countForDomains == 0) {
         viewer.addVariation(0, <?php echo $position; ?>, '<?php echo $dbSNPnote; ?>', 'dbSNP');
       <?php endwhile; ?>
     <?php endif; ?>
-	
+
 	/* List the TopMed Data */
     <?php
     if (isset($geneDetails['dbs']['ENST'])) :
@@ -424,7 +425,7 @@ if ($countForDomains == 0) {
         viewer.addVariation(0, <?php echo $position; ?>, '<?php echo $TopMednote; ?>', 'TopMed');
       <?php endwhile; ?>
     <?php endif; ?>
-    
+
 	/* List the Mouse Variants */
     <?php
     $mouseQuery = getMouseVariantsData($mouseNPid);
@@ -439,7 +440,7 @@ if ($countForDomains == 0) {
         $position  = 0;
       }
       $mouseNote = 'Mutation: ' . $row['aa_change'] . ' at ' . $position . '<br> Variant Type: ' . $row['variant_type'];
-	  
+
     ?>
       viewer.addVariation(1, <?php echo $position; ?>, '<?php echo $mouseNote; ?>', 'Mouse Variant');
 	  viewer.addVariation(1, <?php echo $position; ?>, '<?php echo $significance; ?>', 'PHE_mouse');

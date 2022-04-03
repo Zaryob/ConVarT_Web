@@ -36,6 +36,9 @@ services:
       - backend
   www:
     build: .
+    cpu_count: 16
+    cpu_percent: 80
+    cpus: 16
     container_name: apache_server
     ports:
       - "8000:80"

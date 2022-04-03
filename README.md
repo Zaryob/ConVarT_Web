@@ -12,3 +12,9 @@ The data visualization tool is freely available for the benefit of the scientifi
 # Details coming soon
 
 > Details coming soon
+
+
+MSA THERE: SELECT GROUP_CONCAT(convart_gene_id) AS ids, msa_id FROM msa_gene GROUP BY msa_id HAVING ids = '22438,45031' LIMIT 1,
+No MSA: SELECT GROUP_CONCAT(convart_gene_id) AS ids, msa_id FROM msa_gene GROUP BY msa_id HAVING ids = '76138,80285'
+
+

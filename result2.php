@@ -67,7 +67,7 @@ $geneIdMouse =  $geneDetailsMouse['dbs']['NCBI'];
 //    $geneDetailsMouse['species_id'] = "Mus musculus";
 //}
 $transcriptIdWorm = getTranscriptIdByConvartGeneId($worm_convart_id);
-$geneDetailsWorm = getGeneDetailsById($transcriptIdWorm);	
+$geneDetailsWorm = getGeneDetailsById($transcriptIdWorm);
 
 $gnomADResult = "";
 $ClinVarStatisticResult = "";
@@ -98,7 +98,7 @@ $geneDetails['dbs']['NCBI'] = @str_replace('"', '', $geneDetails['dbs']['NCBI'])
 // $humanGeneVariants = searchProteinNumbers($geneInfo['human_gene_id'])['Homo sapiens'];
 
 #echo microtime(true)-$start;
-#$humanGeneVariants = array_filter($humanGeneVariants, function($x) {global $msa; return $x['transcript_id'] != $msa['human_convart_gene_id']; }); 
+#$humanGeneVariants = array_filter($humanGeneVariants, function($x) {global $msa; return $x['transcript_id'] != $msa['human_convart_gene_id']; });
 
 $geneId = str_replace("\"", "", $geneDetails['dbs']['NCBI']);
 if (!isset($geneIdMouse) or empty($geneIdMouse)) {
@@ -182,7 +182,7 @@ if (isset($humanGeneDetails['dbs']['ENST'])) {
     $dbSNPCounts = [];
 }
 
-#Statistics TopMed 
+#Statistics TopMed
 if (isset($humanGeneDetails['dbs']['ENST'])) {
     $TopMedCounts = getTopMedStats(@$humanGeneDetails['dbs']['ENST']);
 } else {
@@ -291,15 +291,14 @@ if ($_GET['test']) {
                         <b><?= $dynamicChartTitle; ?></b>
                         <?php if ($dynamicChart == 'clinvar') : ?>
                             <a href="#clinical_significance_classification_help" class="modal-trigger tooltipped" data-position="right" data-delay="10" data-tooltip="Classification of Clinicial Significance of ClinVar Data"><i class="material-icons blue-text text-darken-1">help</i></a>
-                        <?php endif; ?>
-
+                        <?php endif;
                     </div>
 
 
                     <div id="dynamic_chart"></div>
                 </div>
             </div> <!-- end of gene card -->
-            
+
             <iframe id="CurrentProjectTool2" src="tool.php?msa_id=<?= $msa_id; ?>&human=<?= $_GET['human']; ?>&mouse=<?= $_GET['mouse']; ?>&worm=<?= $_GET['worm']; ?>&version=2" width="96%" style="min-height:430px; height:auto !important" frameborder="0"></iframe>
             <p>
   ∙ Conservation scores are calculated by (number of aminoacids that matches between Human & the compared species ) / (aminoacid count in the human gene)
@@ -307,7 +306,7 @@ if ($_GET['test']) {
                 ∙ Please click the name of species for the protein accession number used in the alignment.
                 <br>∙ A <span style="color:#52b5f1;font-weight:bold">p</span> letter used as a pointer to positions of post translational modifications in human.
                 <br>∙ A <span style="color:black;font-weight:bold">⁑</span> double asterisk showing orthologous variants between human, mouse and C. elegans.
-				<br>∙ A <span style="color:black;font-weight:bold">✳</span> single asterisk displaying phenotypic variants from mouse and C. elegans. 
+				<br>∙ A <span style="color:black;font-weight:bold">✳</span> single asterisk displaying phenotypic variants from mouse and C. elegans.
                 <br>∙ Protein domains illustrated above belong to <i>Homo sapiens</i> (Human).
                 <!-- <br>∙ ClinVar stacked bar chart represents whole protein isoforms of the gene. Please, check the other protein isoforms of the gene: -->
                 <br>
@@ -448,7 +447,7 @@ if ($_GET['test']) {
             </div>
         </div><br>
     </div>
-	
+
 
     <!-- ClinVar Table -->
     <div class="col s12 m12 l12 section scrollspy active">
@@ -593,13 +592,13 @@ if ($_GET['test']) {
                     </tr>
                 </thead>
                 <tbody id="tbody">
-                       
+
                 </tbody>
                 </table></div>
         </div>
     <br></div>
 
-<!-- TopMed table --> 
+<!-- TopMed table -->
     <div class="col s12 m12 l12 section scrollspy active">
         <div class="section scrollspy collapsible-header"><i class="material-icons">chrome_reader_mode</i>TopMed</div>
         <div class="collapsible-body">
@@ -993,15 +992,15 @@ if ($_GET['test']) {
             }
         });
         $('#gnomADtable').removeClass('hide');
-		
-		
-		//GO Annotation Table 
+
+
+		//GO Annotation Table
         $('#go_annotationTable').DataTable( {
             "processing": false,
             "serverSide": false,
             "pageLength": 20,
 
-            
+
 			<?php if (isset($other_idHuman) || isset($other_idMouse) || isset($other_idWorm)) : ?>
 			"ajax": "<?= $GLOBALS['base_url']; ?>api.php?action=go_annotation&id=<?= "%22",urlencode($other_idHuman),"%22,%22", urlencode($other_idMouse), "%22,%22",urlencode($other_idWorm),"%22"; ?>",
             <?php endif; ?>
@@ -1019,7 +1018,7 @@ if ($_GET['test']) {
 					return '<p class="go-domain">' + data + '</p>';
 				},
 				//"defaultContent": "<button>Click!</button>"
-            }], 
+            }],
             "deferRender": true,
             language: {
                 searchPlaceholder: "Search in the table",
@@ -1027,14 +1026,14 @@ if ($_GET['test']) {
             }
         } );
         $('#go_annotationTable').removeClass('hide');
-		
-        //Community Table 
+
+        //Community Table
          $('#CommunityTable').DataTable( {
             "processing": false,
             "serverSide": false,
             "pageLength": 20,
 
-            
+
 			<?php if (isset($humanGeneDetails['dbs']['NP']) || isset($dbIds_mouse) || isset($transcriptIdWorm)) : ?>
 			"ajax": "<?= $GLOBALS['base_url']; ?>api.php?action=community&id=<?= urlencode($humanGeneDetails['dbs']['NP']),",%22", urlencode($dbIds_mouse), "%22,%22",urlencode($transcriptIdWorm),"%22"; ?>",
             <?php endif; ?>
@@ -1062,7 +1061,7 @@ if ($_GET['test']) {
                     return '<a class="variation-link" target="_blank" href="' + data + '">' + data + '</a>';
                 },
                 "defaultContent": "<button>Click!</button>"
-            }], 
+            }],
             "deferRender": true,
             language: {
                 searchPlaceholder: "Search in the table",
@@ -1077,7 +1076,7 @@ if ($_GET['test']) {
             "pageLength": 20,
 
             <?php if (isset($dbIds_mouse)) : ?> "ajax": "<?= $GLOBALS['base_url']; ?>api.php?action=mouseVariants&id=<?= urlencode(normalizeIds($dbIds_mouse)); ?>",
-            <?php endif; ?> 
+            <?php endif; ?>
 			"columnDefs": [{
                 "targets": 4,
                 "render": function(data, type, row) {
@@ -1174,7 +1173,7 @@ if ($_GET['test']) {
         <?php else : ?>
             $('#ptmTable').parent().parent().parent().hide();
         <?php endif; ?>
-		
+
 		<?php if ($TopMedCounts > 0) : ?>
             //TopMed Table
             $('#TopMedTable').DataTable({
@@ -1207,7 +1206,7 @@ if ($_GET['test']) {
         <?php else : ?>
             $('#TopMedTable').parent().parent().parent().hide();
         <?php endif; ?>
-		
+
         <?php if (array_sum($dbSNPCounts) > 0) : ?>
             //dbSNP Table
             $('#dbSNPTable').DataTable({

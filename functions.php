@@ -41,9 +41,9 @@ function getHumanHomolog($geneId)
 
     $geneInfoHuman = mysqli_query(
         $db_connection,
-        "SELECT homology.*, symb.meta_value as human_gene_symbol FROM homology 
-                        JOIN ncbi_gene_meta symb ON symb.ncbi_gene_id = homology.human_gene_id 
-                        and symb.meta_key = 'gene_symbol' 
+        "SELECT homology.*, symb.meta_value as human_gene_symbol FROM homology
+                        JOIN ncbi_gene_meta symb ON symb.ncbi_gene_id = homology.human_gene_id
+                        and symb.meta_key = 'gene_symbol'
                         WHERE " . implode(' or ', $availableSpecies)
     );
 
@@ -170,16 +170,16 @@ function getMSAByGeneId($convartGeneId, $withFasta = true)
             #Burayı 19.11.2020'de msa_best_combination tablosunda bulunmayan genler için yazdım. (Ahmet Sayıcı)
             #return null;
             $query = mysqli_query($db_connection, "SELECT mg.msa_id AS id, mg_hum.convart_gene_id AS human_convart_gene_id,
-                                ncbi_hum.ncbi_gene_id AS ncbi_gene_id 
+                                ncbi_hum.ncbi_gene_id AS ncbi_gene_id
                                 FROM msa_gene AS mg " .
-                " INNER JOIN msa_gene AS mg_hum ON mg_hum.msa_id = mg.msa_id 
+                " INNER JOIN msa_gene AS mg_hum ON mg_hum.msa_id = mg.msa_id
                               LEFT JOIN convart_gene_to_db as gdb ON gdb.convart_gene_id=mg.convart_gene_id
-                              INNER JOIN ncbi_gene_meta AS ncbi_hum ON 
+                              INNER JOIN ncbi_gene_meta AS ncbi_hum ON
                                   ncbi_hum.meta_value='{$withoutVersion}'
                               WHERE " .
                 "
                             (gdb.db_id='{$withoutVersion}')
-			
+
                              LIMIT 1");
             if (mysqli_num_rows($query) == 0) {
                 #Burayı 19.11.2020'de msa_best_combination tablosunda bulunmayan genler için yazdım. (Ahmet Sayıcı)
@@ -194,12 +194,12 @@ function getMSAByGeneId($convartGeneId, $withFasta = true)
     } else {
 
         $query = mysqli_query($db_connection, "SELECT mg.msa_id AS id, mg_hum.convart_gene_id AS human_convart_gene_id,
-                                ncbi_hum.ncbi_gene_id AS ncbi_gene_id 
+                                ncbi_hum.ncbi_gene_id AS ncbi_gene_id
                                 FROM msa_gene AS mg " .
-            " INNER JOIN msa_gene AS mg_hum ON mg_hum.msa_id = mg.msa_id 
+            " INNER JOIN msa_gene AS mg_hum ON mg_hum.msa_id = mg.msa_id
                               INNER JOIN msa_best_combination AS mb ON mg_hum.convart_gene_id=mb.convart_gene_id
                               LEFT JOIN convart_gene_to_db as gdb ON gdb.convart_gene_id=mg.convart_gene_id
-                              INNER JOIN ncbi_gene_meta AS ncbi_hum ON 
+                              INNER JOIN ncbi_gene_meta AS ncbi_hum ON
                                   ncbi_hum.meta_value='{$withoutVersion}'
                               WHERE " .
             "
@@ -212,11 +212,11 @@ function getMSAByGeneId($convartGeneId, $withFasta = true)
             #Burayı 19.11.2020'de msa_best_combination tablosunda bulunmayan genler için yazdım. (Ahmet Sayıcı)
             #return null;
             $query = mysqli_query($db_connection, "SELECT mg.msa_id AS id, mg_hum.convart_gene_id AS human_convart_gene_id,
-                                ncbi_hum.ncbi_gene_id AS ncbi_gene_id 
+                                ncbi_hum.ncbi_gene_id AS ncbi_gene_id
                                 FROM msa_gene AS mg " .
-                " INNER JOIN msa_gene AS mg_hum ON mg_hum.msa_id = mg.msa_id 
+                " INNER JOIN msa_gene AS mg_hum ON mg_hum.msa_id = mg.msa_id
                               LEFT JOIN convart_gene_to_db as gdb ON gdb.convart_gene_id=mg.convart_gene_id
-                              INNER JOIN ncbi_gene_meta AS ncbi_hum ON 
+                              INNER JOIN ncbi_gene_meta AS ncbi_hum ON
                                   ncbi_hum.meta_value='{$withoutVersion}'
                               WHERE " .
                 "
@@ -240,7 +240,7 @@ function hasMSA($convartGeneId)
     global $db_connection;
     $convartGeneIdWithoutVersion = explode('.', $convartGeneId)[0];
 
-    $query = mysqli_query($db_connection, "SELECT msa_id FROM msa_gene AS mg LEFT JOIN convart_gene_to_db as gdb ON 
+    $query = mysqli_query($db_connection, "SELECT msa_id FROM msa_gene AS mg LEFT JOIN convart_gene_to_db as gdb ON
                         gdb.convart_gene_id=mg.convart_gene_id WHERE
                         mg.convart_gene_id='{$convartGeneId}' OR gdb.db_id='{$convartGeneIdWithoutVersion}'");
 
@@ -388,7 +388,7 @@ function getHumanProteinDomains($transcriptId)
 {
     global $db_connection;
 
-    $domainsQuery = mysqli_query($db_connection, "SELECT * FROM domains LEFT JOIN domains_desc ON domains.pfam_name = domains_desc.pfam_name WHERE 
+    $domainsQuery = mysqli_query($db_connection, "SELECT * FROM domains LEFT JOIN domains_desc ON domains.pfam_name = domains_desc.pfam_name WHERE
     transcript_id LIKE '{$transcriptId}.%' AND evalue < 1e-01 ORDER BY start_point ASC");
 
     $countForDomains = mysqli_num_rows($domainsQuery);
@@ -402,7 +402,7 @@ function getProteinDomains($convart_ids)
 {
     global $db_connection;
 
-    $domainsQuery = mysqli_query($db_connection, "SELECT * FROM domains_new LEFT JOIN domain_desc_new ON domains_new.pfam_domain_id = domain_desc_new.pfam_domain_id 
+    $domainsQuery = mysqli_query($db_connection, "SELECT * FROM domains_new LEFT JOIN domain_desc_new ON domains_new.pfam_domain_id = domain_desc_new.pfam_domain_id
 	WHERE domains_new.uniprot_id IN (SELECT db_id FROM convart_gene_to_db WHERE db = 'UNIPROT' AND convart_gene_id IN ({$convart_ids}))");
 
     $countForDomains = mysqli_num_rows($domainsQuery);
@@ -495,11 +495,13 @@ function getCosmicStats($transcriptId, $column = 'accession_number')
 }
 
 #dbSNP Chart Stats
-function getdbSNPStats($transcriptId, $column = 'Feature')
+function getdbSNPStats($transcriptId, $column = 'ensm_transcript_id')
 {
     global $db_connection;
     $transcriptId = normalizeIds($transcriptId);
-    $dbSNPStatisticsQuery = mysqli_query($db_connection, "SELECT Impact, COUNT(dbsnp_index) FROM dbsnp WHERE dbsnp.{$column} IN ({$transcriptId}) GROUP BY Impact");
+    # SELECT polyphen_score, COUNT(id) FROM dbsnp WHERE dbsnp.ensm_transcript_id IN ("ENST00000438307") GROUP BY polyphen_score
+    # error_log("SELECT Impact, COUNT(dbsnp_index) FROM dbsnp WHERE dbsnp.{$column} IN ({$transcriptId}) GROUP BY Impact");
+    $dbSNPStatisticsQuery = mysqli_query($db_connection, "SELECT polyphen_score, COUNT(id) FROM dbsnp WHERE dbsnp.{$column} IN ({$transcriptId}) GROUP BY polyphen_score");
     $countsFordbSNP = [];
 
     while ($row = mysqli_fetch_assoc($dbSNPStatisticsQuery)) {
@@ -526,7 +528,7 @@ function getTopMedStats($transcriptId, $column = 'ensm_transcript_id')
     #while ($row = mysqli_fetch_assoc($TopMedStatisticsQuery)) {
     #    $countsForTopMed= $row['COUNT(id)'];
     #}
-	
+
     return $countsForTopMed;
 }
 
@@ -581,7 +583,7 @@ function getHMOrthologData($humanId, $mouseId, $wormId)
     if ($humanId == null || $mouseId == null || $wormId == null)
         return null;
 
-    $query = mysqli_query($db_connection, 
+    $query = mysqli_query($db_connection,
     "SELECT Human_Variation, Mouse_Significance FROM human_mouse_orthologous as hmo
     INNER JOIN convart_gene_to_db as cgd1
     INNER JOIN convart_gene_to_db as cgd2
@@ -605,7 +607,7 @@ function getHCOrthologData($humanId, $mouseId, $wormId)
     if ($humanId == null || $mouseId == null || $wormId == null)
         return null;
 
-    $query = mysqli_query($db_connection, 
+    $query = mysqli_query($db_connection,
     "SELECT Human_Variation, C_elegans_Significance FROM human_celegans_orthologous as hco
     INNER JOIN convart_gene_to_db as cgd1
     INNER JOIN convart_gene_to_db as cgd2
@@ -630,7 +632,7 @@ function getHMCOrthologData($humanId, $mouseId, $wormId)
     if ($humanId == null || $mouseId == null || $wormId == null)
         return null;
 
-    $query = mysqli_query($db_connection, 
+    $query = mysqli_query($db_connection,
     "SELECT Human_Variation FROM human_celegans_orthologous as hco
     INNER JOIN convart_gene_to_db as cgd1
     INNER JOIN convart_gene_to_db as cgd2
@@ -644,7 +646,7 @@ function getHMCOrthologData($humanId, $mouseId, $wormId)
 
     if (mysqli_num_rows($query) == 0)
         return null;
-    
+
     return $query;
     */
     return 0;
@@ -682,9 +684,9 @@ function validateCommunityVariant($validation_code)
     global $db_connection;
 
     $query = mysqli_query($db_connection, "UPDATE community_variants SET `validation` = 1 WHERE validation_code = '$validation_code';");
-      
+
      if (mysqli_affected_rows($db_connection) == 0) {
-        echo '<script>alert("Update Failed, Try Again!")</script>'; 
+        echo '<script>alert("Update Failed, Try Again!")</script>';
         return "Please try again later!";
     }
 
@@ -740,7 +742,7 @@ function getdbSNPData($transcriptId, $column = 'Feature', $cols = '*')
 function getTopMedData($transcriptId, $column = 'ensm_transcript_id', $cols = '*')
 {
 	global $db_connection;
-	
+
 	if ($transcriptId == null)
         return null;
 
@@ -749,7 +751,7 @@ function getTopMedData($transcriptId, $column = 'ensm_transcript_id', $cols = '*
     if (mysqli_num_rows($query) == 0)
         return null;
 
-    return $query; 
+    return $query;
 }
 
 function getCelVariantsData($transcriptId, $column = 'refseq_id', $cols = '*')
@@ -781,13 +783,13 @@ function searchProteinNumbers($value)
     $ids[] = "SUBSTRING_INDEX(nc_prot.meta_value, '.', 1)";
 
     $ids = implode(',', $ids);
-    $query = mysqli_query($db_connection, "SELECT GROUP_CONCAT(DISTINCT CONCAT(cdb.convart_gene_id, ',', cdb.db_id, ',', nc_sym.meta_value, ',', nc_spec.meta_value) SEPARATOR ';') 
-                        AS data, nc_prot.ncbi_gene_id FROM ncbi_gene_meta AS nc_search INNER JOIN ncbi_gene_meta AS nc_spec ON 
-                        nc_search.ncbi_gene_id=nc_spec.ncbi_gene_id AND nc_spec.meta_key='species_id' INNER JOIN ncbi_gene_meta AS nc_sym ON 
-                        nc_search.ncbi_gene_id=nc_sym.ncbi_gene_id AND nc_sym.meta_key='gene_symbol' INNER JOIN ncbi_gene_meta AS nc_prot ON 
-                        nc_search.ncbi_gene_id=nc_prot.ncbi_gene_id AND nc_prot.meta_key='protein_number' INNER JOIN convart_gene_to_db AS cdb ON 
+    $query = mysqli_query($db_connection, "SELECT GROUP_CONCAT(DISTINCT CONCAT(cdb.convart_gene_id, ',', cdb.db_id, ',', nc_sym.meta_value, ',', nc_spec.meta_value) SEPARATOR ';')
+                        AS data, nc_prot.ncbi_gene_id FROM ncbi_gene_meta AS nc_search INNER JOIN ncbi_gene_meta AS nc_spec ON
+                        nc_search.ncbi_gene_id=nc_spec.ncbi_gene_id AND nc_spec.meta_key='species_id' INNER JOIN ncbi_gene_meta AS nc_sym ON
+                        nc_search.ncbi_gene_id=nc_sym.ncbi_gene_id AND nc_sym.meta_key='gene_symbol' INNER JOIN ncbi_gene_meta AS nc_prot ON
+                        nc_search.ncbi_gene_id=nc_prot.ncbi_gene_id AND nc_prot.meta_key='protein_number' INNER JOIN convart_gene_to_db AS cdb ON
                         cdb.db_id=nc_prot.meta_value
-                        #INNER JOIN msa_gene AS mg ON 
+                        #INNER JOIN msa_gene AS mg ON
                         #mg.convart_gene_id=cdb.convart_gene_id
                         #INNER JOIN msa_best_combination AS mb ON
                         #mb.msa_id = mg.msa_id
@@ -871,11 +873,11 @@ function search_spemud_proteins($spemud_value)
     if (empty($spemud_value))
         return null;
 
-    $queryIds = mysqli_query($db_connection, "SELECT DISTINCT nc2.ncbi_gene_id AS human_gene_id, homology.mouse_gene_id, homology.worm_gene_id 
-                                                FROM ncbi_gene_meta AS nc1 
-                                                INNER JOIN ncbi_gene_meta AS nc2 ON nc1.ncbi_gene_id=nc2.ncbi_gene_id 
-                                                INNER JOIN homology ON nc2.ncbi_gene_id = homology.human_gene_id  
-                                                WHERE nc1.meta_value='homo sapiens' 
+    $queryIds = mysqli_query($db_connection, "SELECT DISTINCT nc2.ncbi_gene_id AS human_gene_id, homology.mouse_gene_id, homology.worm_gene_id
+                                                FROM ncbi_gene_meta AS nc1
+                                                INNER JOIN ncbi_gene_meta AS nc2 ON nc1.ncbi_gene_id=nc2.ncbi_gene_id
+                                                INNER JOIN homology ON nc2.ncbi_gene_id = homology.human_gene_id
+                                                WHERE nc1.meta_value='homo sapiens'
                                                 AND nc2.meta_value='$spemud_value'");
 
 
@@ -912,14 +914,14 @@ function search_spemud_proteins($spemud_value)
 			$html_outputs = array ();
             for ($i = 0; $i < count($geneIdList); $i++) {
                 $tempGeneIds = $geneIdList[$i];
-                $queryProteinIds = mysqli_query($db_connection, "SELECT nc1.ncbi_gene_id, nc2.meta_value AS gene_symbol, 
-                                                                GROUP_CONCAT(DISTINCT nc1.meta_value) AS prot_ids, cdb.convart_gene_id 
-                                                                FROM ncbi_gene_meta AS nc1 
-                                                                INNER JOIN ncbi_gene_meta AS nc2 ON nc1.ncbi_gene_id=nc2.ncbi_gene_id 
-                                                                INNER JOIN convart_gene_to_db AS cdb ON nc1.meta_value=cdb.db_id 
-                                                                WHERE nc1.ncbi_gene_id='$tempGeneIds' 
-                                                                AND nc1.meta_key='protein_number' 
-                                                                AND nc2.meta_key='gene_symbol' 
+                $queryProteinIds = mysqli_query($db_connection, "SELECT nc1.ncbi_gene_id, nc2.meta_value AS gene_symbol,
+                                                                GROUP_CONCAT(DISTINCT nc1.meta_value) AS prot_ids, cdb.convart_gene_id
+                                                                FROM ncbi_gene_meta AS nc1
+                                                                INNER JOIN ncbi_gene_meta AS nc2 ON nc1.ncbi_gene_id=nc2.ncbi_gene_id
+                                                                INNER JOIN convart_gene_to_db AS cdb ON nc1.meta_value=cdb.db_id
+                                                                WHERE nc1.ncbi_gene_id='$tempGeneIds'
+                                                                AND nc1.meta_key='protein_number'
+                                                                AND nc2.meta_key='gene_symbol'
                                                                 GROUP BY cdb.convart_gene_id");
 
                 $totalResultCount += mysqli_num_rows($queryProteinIds);
@@ -946,16 +948,16 @@ function search_spemud_proteins($spemud_value)
 					elseif (strcmp($key, "worm") == 0){
 						$variation_count = getWormVariationCount($temp_prot_ids);
 					}
-                    
+
                     $spemud_radio_button = "<div class='convart-radio'><input id='$key-$temp_convart_ids' name='$key' class='check' value='$temp_convart_ids' type='radio' /> <label style='color:$colors[$colId];' for='$key-$temp_convart_ids'>GeneID: $tempGeneIds | $temp_gene_symbol | $temp_prot_ids | $variation_count</label></div>";
-                    
+
 					$row_input = array($spemud_radio_button, $variation_count);
 					array_push($html_outputs, $row_input);
                 }
-									
+
             }
 			$ranks = array_column($html_outputs, 1);
-			array_multisort($ranks, SORT_DESC, $html_outputs);				
+			array_multisort($ranks, SORT_DESC, $html_outputs);
 			for ($j = 0; $j < count($html_outputs); $j++) {
 				if (strcmp($key, "human") == 0) {
                     $humanResults .= $html_outputs[$j][0];
@@ -1088,7 +1090,7 @@ function linkifyUniprot($commaSeparatedIds)
         $ids = $commaSeparatedIds;
     }
 
-    foreach ($ids as $i => $id) {  
+    foreach ($ids as $i => $id) {
         $link = "https://alphafold.ebi.ac.uk/entry/" .   $id;
         $ids[$i] = " <a href='{$link}' target='_blank'>$id</a>";
     }
@@ -1106,8 +1108,8 @@ function getConservationScores($msaId)
         'variant_polarity_match_score' => 'Variation associated amino acid similarity (%)'
     ];
 
-    $conservationScoreQuery = mysqli_query($db_connection, "SELECT GROUP_CONCAT(specie) AS species_list, score_type, 
-                                    GROUP_CONCAT(ROUND(score*100/aminoacid_number)) AS score_list FROM conservation_scores WHERE msa_id = '{$msaId}' 
+    $conservationScoreQuery = mysqli_query($db_connection, "SELECT GROUP_CONCAT(specie) AS species_list, score_type,
+                                    GROUP_CONCAT(ROUND(score*100/aminoacid_number)) AS score_list FROM conservation_scores WHERE msa_id = '{$msaId}'
                                     GROUP BY score_type ORDER BY FIELD(specie, 'Pan troglodytes', 'Macaca mulatta', 'Mus musculus', 'Rattus norvegicus', 'Danio rerio', 'Xenopus tropicalis','Drosophila melanogaster','Caenorhabditis elegans')");
 
     $countForConScore = mysqli_num_rows($conservationScoreQuery);
