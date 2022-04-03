@@ -291,7 +291,7 @@ if ($_GET['test']) {
                         <b><?= $dynamicChartTitle; ?></b>
                         <?php if ($dynamicChart == 'clinvar') : ?>
                             <a href="#clinical_significance_classification_help" class="modal-trigger tooltipped" data-position="right" data-delay="10" data-tooltip="Classification of Clinicial Significance of ClinVar Data"><i class="material-icons blue-text text-darken-1">help</i></a>
-                        <?php endif;
+                        <?php endif;?>
                     </div>
 
 
